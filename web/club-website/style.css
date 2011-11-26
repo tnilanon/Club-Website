@@ -1,0 +1,160 @@
+
+body
+{
+	background-color: #F7FFFF;
+	margin: 0;
+	padding: 0;
+}
+
+input[type="text"]:hover, input[type="password"]:hover
+{
+	background-color: #FFC;
+	border-color: #F90;
+}
+
+input[type="submit"]
+{
+	font-weight: bold;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.centered
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.errorMessage
+{
+	font-size: large;
+	font-weight: bold;
+	color: red;
+}
+
+#navigationBar
+{
+	width: 40em;
+	margin-top: 2%;
+	margin-bottom: 0;
+}
+
+.navigationBarItem
+{
+	border: 1px solid #BEBEBE;
+}
+
+.navigationBarItem:hover
+{
+	background-color: #FFC;
+}
+
+#bookmarkList
+{
+	background-color: #FFF;
+	width: 80%;
+	margin: 5% auto;
+}
+
+#bookmarkListTable
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	text-align: center;
+	border: 1px solid #BEBEBE;
+}
+
+.bookmarkListRow:hover
+{
+	background-color: #FCC;
+}
+
+.bookmarkListCell
+{
+	border-width: 0 1px 0 1px;
+	border-style: solid;
+	border-color: #BEBEBE;
+}
+
+._form
+{
+	background-color: #E0FFE0;
+	color: #191950;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #BEBEBE;
+	text-align: center;
+}
+
+#loginForm
+{
+	width: 22em;
+	margin-top: 15%;
+	margin-bottom: 15%;
+}
+
+
+#registerForm
+{
+	width: 24em;
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
+#addBookmarkForm
+{
+	width: 20em;
+	margin-top: 5%;
+	margin-bottom: 0;
+}
+
+#footer
+{
+	width: 100%;
+	text-align: center;
+}
+
+/*
+.likeable_frame
+{
+	width: 100%;
+	margin: 5% auto;
+}
+
+.likeable_frame_table
+{
+	background-color: #FFFACD;
+	width: 90%;
+	border: 1px solid #BEBEBE;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.likeable_frame_table_left
+{
+	border-width: 3px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-color: #BEBEBE;
+	text-align: right;
+}
+
+.likeable_frame_table_right
+{
+	width: 3em;
+}
+
+#logout_form
+{
+	float: right;
+	width: 7.6em;
+	height: 1.63em;
+	margin-top: 4.75%;
+	margin-bottom: 2%;
+	margin-right: 5%;
+}
+*/

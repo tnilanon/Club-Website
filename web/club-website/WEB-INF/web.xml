@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+		 version="2.4">
+
+	<display-name>CMU CS 15-437 FINAL</display-name>
+	<description>
+		Configuration file for final project (Club website)
+	</description>
+	
+	<servlet>
+		<servlet-name>app-controller</servlet-name>
+		<servlet-class>edu.cmu.cs15437.clubwebsite.controller.Controller</servlet-class>
+		<init-param>
+			<param-name>jdbcDriver</param-name> 
+			<param-value>${database.driver}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jdbcURL</param-name> 
+			<param-value>${database.url}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jdbcUser</param-name> 
+			<param-value>${database.user}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jdbcPassword</param-name> 
+			<param-value>${database.password}</param-value>
+		</init-param>
+	</servlet>
+	
+	<!-- Use "home" as a handle url for just-arrived users -->
+	
+	<servlet-mapping>
+		<servlet-name>app-controller</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>app-controller</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>home</welcome-file>
+	</welcome-file-list>
+
+</web-app>
+

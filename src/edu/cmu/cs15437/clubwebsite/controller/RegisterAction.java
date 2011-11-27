@@ -69,7 +69,7 @@ public class RegisterAction extends Action {
 			String redirectTo = (String) session.getAttribute("redirectTo");
 			session.removeAttribute("redirectTo");
 			if (redirectTo != null) return redirectTo;
-			return "/myBookmarks.do";
+			return "home.jsp";
 		} catch (DAOException e) {
 			errors.add(e.getMessage());
 			return "register.jsp";

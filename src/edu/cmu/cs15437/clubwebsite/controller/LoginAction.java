@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.cmu.cs15437.clubwebsite.model.Model;
 import edu.cmu.cs15437.clubwebsite.model.UserDAO;
-import edu.cmu.cs15437.clubwebsite.databeans.User;
+import edu.cmu.cs15437.clubwebsite.databeans.UserBean;
 import edu.cmu.cs15437.clubwebsite.formbeans.LoginForm;
 import edu.cmu.cs15437.clubwebsite.controller.Controller;
 
@@ -34,14 +34,13 @@ public class LoginAction extends Action {
 		
 		try {
 			LoginForm form = loginFormBeanFactory.create(request);
-			request.setAttribute("form", form);
 			
 			// Support redirect
 			// Redirect to the original page if the servlet redirects the user here
 			String actionName = Controller.getActionNameFromPath(request.getServletPath());
 			if (! (actionName.equals("login.do") || actionName.equals(""))) {
 				String queryString = request.getQueryString();
-				String redirectTo = request.getServletPath() + ((queryString == null)? "?": "?" + queryString);
+				String redirectTo = request.getServletPath() + "?" + ((queryString == null)? "": queryString);
 				request.getSession().setAttribute("redirectTo", redirectTo);
 			}
 			
@@ -57,7 +56,7 @@ public class LoginAction extends Action {
 			}
 						
 			// Look up the user
-			User user = userDAO.lookup(form.getEmailAddress());
+			UserBean user = userDAO.lookupWithUserName(form.getUserName());
 			
 			if (form.getButton().equals("Register")) {
 				// User wants to register
@@ -86,7 +85,7 @@ public class LoginAction extends Action {
 			String redirectTo = (String) session.getAttribute("redirectTo");
 			session.removeAttribute("redirectTo");
 			if (redirectTo != null) return redirectTo;
-			return "/myBookmarks.do";
+			return "home.jsp";
 		} catch (DAOException e) {
 			errors.add(e.getMessage());
 			return "login.jsp";

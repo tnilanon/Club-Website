@@ -16,8 +16,9 @@ import java.util.*;
 public class VideoTagDAO {
 	private BeanFactory< VideoTagBean > videoTagFactory;
 	private VideoCategoryDAO videoCategoryDAO;
+	private UserDAO userDAO;
 	
-	public VideoTagDAO(VideoCategoryDAO d) throws DAOException {
+	public VideoTagDAO(VideoCategoryDAO d, userDAO u) throws DAOException {
 		try {
 			BeanTable< VideoTagBean > videoTagTable = BeanTable.getInstance(VideoTagBean.class, "clubweb_video_tag");
 			if(! videoTagTable.exists()) videoTagTable.create("tagId");
@@ -25,6 +26,7 @@ public class VideoTagDAO {
 			videoTagFactory = videoTagTable.getFactory();
 			
 			videoCategoryDAO = d;
+			userDAO = u;
 		} catch (BeanFactoryException e) {
 			throw new DAOException(e);
 		}
@@ -78,7 +80,12 @@ public class VideoTagDAO {
 	}
 	
 	public String descriptionForTagId(int tagId) {
-		return videoCategoryDAO.lookupWithCategoryId(lookupWithTagId(tagId).getCategoryId()).getDescription();
+		VideoCategoryBean category = videoCategoryDAO.lookupWithCategoryId(lookupWithTagId(tagId).getCategoryId());
+		if (category.isLinkedWithUser()) {
+			return userDAO.lookupWithUserId(category.getUserId()).getDescription();
+		} else {
+			return category.getDescription();
+		}
 	}
 	
 	public List< Integer > videoIdsMatchingCategories(List< VideoCategoryBean > categories) {

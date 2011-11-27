@@ -30,6 +30,16 @@ public class UserDAO {
 		return factory;
 	}
 	
+	public UserBean lookupWithUserId(int userId) throws DAOException {
+		try {
+			return factory.lookup(userId);
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			return null;
+		}
+	}
+	
 	public UserBean lookupWithUserName(String userName) throws DAOException {
 		try {
 			return factory.match(MatchArg.equals("userName", userName))[0];

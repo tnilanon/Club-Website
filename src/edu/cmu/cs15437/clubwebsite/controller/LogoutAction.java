@@ -15,7 +15,7 @@ public class LogoutAction extends Action {
 	public String perform(HttpServletRequest request) {
 		request.getSession(false).removeAttribute("user");
 		
-		return "login.jsp";
+		return "home.jsp";
 	}	
 }
 

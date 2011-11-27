@@ -33,7 +33,7 @@ public class Model {
 			userDAO = new UserDAO();
 			videoCommentDAO = new VideoCommentDAO();
 			videoCategoryDAO = new VideoCategoryDAO();
-			videoTagDAO = new VideoTagDAO(videoCategoryDAO);
+			videoTagDAO = new VideoTagDAO(videoCategoryDAO, userDAO);
 			videoDAO = new VideoDAO(videoTagDAO);
 		} catch (DAOException e) {
 			throw new ServletException(e);

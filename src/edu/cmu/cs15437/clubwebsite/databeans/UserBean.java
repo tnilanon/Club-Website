@@ -61,6 +61,10 @@ public class UserBean implements Comparable< UserBean > {
 		return "User( " + userId + ", UserName( " + userName + " ) )";
 	}
 	
+	public String getDescription() {
+		return userName + "[" + firstName + " " + lastName + "]";
+	}
+	
 	public boolean checkPassword(String password) {
 		return hashedPassword.equals(hash(password));
 	}

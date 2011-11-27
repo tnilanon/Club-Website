@@ -11,6 +11,7 @@
 
 
 <body>
+<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.User"%>
 <div id="Header">
 	<a href="http://www.cmubdc.org" title="CMU Ballroom">CMU Ballroom Dance Club</a>
 </div>
@@ -18,21 +19,24 @@
 
 <div id="linkbar">
   <ul>
-    <li>   <a href="home.jsp">Home</a>
-    <li>   <a href="login.do">Login</a>
-    <li>   <a href="register.do">Register</a>
-    <br/>
-    <br/>
-    
+<%  User user = (User) session.getAttribute("user");
+	if (user == null){  %>
+	<li><a href="home.jsp">Home</a>
+	<li>   <a href="login.do">Login</a><br /><br />
+<%	}
+	else{  %>
+	<li><%=user.getFirstName()%> <%=user.getLastName()%><br /><br />
+	<li><a href="home.jsp">Home</a>
+	<li><a href="logout.jsp">Logout</a><br /><br />
     
     <b><font color="white"><u>RESOURCES</u></font></b>
     <li>   <a href="profile.jsp">Profile</a>
     <li>   <a href="photos.jsp">Photos</a>
     <li>   <a href="videos.jsp">Videos</a>
     <li><b><font color="white">---------------</font></b>
+<%	}  %>
     
-    
-    <br/><b><font color="white"><u>CLUB</u></font></b>
+    <br /><b><font color="white"><u>CLUB</u></font></b>
     <li>   <a href="about.jsp">About</a>
     <li>   <a href="officers.jsp">Officers</a>
     <li>   <a href="calendar.jsp">Calendar</a>
@@ -45,7 +49,7 @@
     
       
     
-    <br/><b><font color="white"><u>COMPETING</u></font></b>
+    <br /><b><font color="white"><u>COMPETING</u></font></b>
     <li>   <a href="competing.jsp">Competing</a>
     <li>   <a href="compTeam.jsp">Comp Team </a>
     <li>   <a href="syllabus_standard.jsp">Syllabus</a>
@@ -53,7 +57,7 @@
     <li>   <a href="scotchBall.jsp">Scotch Ball </a>
 
   </ul>
-<br/>
+<br />
 	<a href="http://www.cmubdc.org" 
      title="CMU Ballroom"><img src="http://www.cmubdc.org/images/logo.jpg" width="110" /></a>
 </div>

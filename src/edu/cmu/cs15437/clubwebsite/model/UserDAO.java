@@ -75,6 +75,10 @@ public class UserDAO {
 	public UserBean create(UserBean bean) throws DAOException {
 		try {
 			Transaction.begin();
+			if (lookupWithUserName(bean.getUserName()) != null)
+				throw new DAOException("User name already exists");
+			if (lookupWithEmailAddress(bean.getEmailAddress()) != null)
+				throw new DAOException("Email address already exists");
 			UserBean dbUser = factory.create();
 			factory.copyInto(bean, dbUser);
 			Transaction.commit();

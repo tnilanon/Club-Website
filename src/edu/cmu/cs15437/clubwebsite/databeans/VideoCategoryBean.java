@@ -3,6 +3,7 @@ package edu.cmu.cs15437.clubwebsite.databeans;
 public class VideoCategoryBean implements Comparable< VideoCategoryBean > {
 	private int categoryId			= -1;
 	private boolean linkedWithUser	= false;
+	private int descriptionUserId	= -1;
 	private String description		= null;
 	
 	public VideoCategoryBean(int categoryId) {
@@ -11,10 +12,12 @@ public class VideoCategoryBean implements Comparable< VideoCategoryBean > {
 	
 	public int getCategoryId()			{ return categoryId;		}
 	public boolean isLinkedWithUser()	{ return linkedWithUser;	}
+	public int getDescriptionUserId()	{ return descriptionUserId;	}
 	public String getDescription()		{ return description;		}
 	
-	public void setLinkedWithUser(boolean b)	{ linkedWithUser = b;	}
-	public void setDescription(String s)		{ description = s;		}
+	public void setLinkedWithUser(boolean b)	{ linkedWithUser = b;		}
+	public void setDescriptionUserId(int i)		{ descriptionUserId = i;	}
+	public void setDescription(String s)		{ description = s;			}
 	
 	public int compareTo(VideoCategoryBean other) {
 		// Order by recency

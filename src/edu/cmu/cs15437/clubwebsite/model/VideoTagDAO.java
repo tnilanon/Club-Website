@@ -18,7 +18,7 @@ public class VideoTagDAO {
 	private VideoCategoryDAO videoCategoryDAO;
 	private UserDAO userDAO;
 	
-	public VideoTagDAO(VideoCategoryDAO d, userDAO u) throws DAOException {
+	public VideoTagDAO(VideoCategoryDAO d, UserDAO u) throws DAOException {
 		try {
 			BeanTable< VideoTagBean > videoTagTable = BeanTable.getInstance(VideoTagBean.class, "clubweb_video_tag");
 			if(! videoTagTable.exists()) videoTagTable.create("tagId");
@@ -82,7 +82,7 @@ public class VideoTagDAO {
 	public String descriptionForTagId(int tagId) {
 		VideoCategoryBean category = videoCategoryDAO.lookupWithCategoryId(lookupWithTagId(tagId).getCategoryId());
 		if (category.isLinkedWithUser()) {
-			return userDAO.lookupWithUserId(category.getUserId()).getDescription();
+			return userDAO.lookupWithUserId(category.getDescriptionUserId()).getDescription();
 		} else {
 			return category.getDescription();
 		}

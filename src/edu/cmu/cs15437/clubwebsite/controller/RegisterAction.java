@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.cmu.cs15437.clubwebsite.model.Model;
 import edu.cmu.cs15437.clubwebsite.model.UserDAO;
-import edu.cmu.cs15437.clubwebsite.databeans.User;
+import edu.cmu.cs15437.clubwebsite.databeans.UserBean;
 import edu.cmu.cs15437.clubwebsite.formbeans.LoginForm;
 import edu.cmu.cs15437.clubwebsite.formbeans.RegisterForm;
 
@@ -35,7 +35,6 @@ public class RegisterAction extends Action {
 		
 		try {
 			RegisterForm form = registerFormBeanFactory.create(request);
-			request.setAttribute("form", form);
 			
 			// No form is passed in; let the user try again
 			if (! form.isPresent()) {
@@ -55,10 +54,15 @@ public class RegisterAction extends Action {
 			}
 			
 			// Register the user
-			User user = new User(form.getEmailAddress());
-			user.setPassword(form.getPassword());
+			UserBean user = new UserBean(-1);
+			user.setUserName(form.getUserName());
+			user.setEmailAddress(form.getEmailAddress());
 			user.setFirstName(form.getFirstName());
 			user.setLastName(form.getLastName());
+			user.setSex(form.getSex());
+			user.setUserGroup(0);
+			user.setMembershipExpirationDate(Date());
+			user.setPassword(form.getPassword());
 			userDAO.create(user);
 			
 			// Remeber the user
@@ -69,7 +73,7 @@ public class RegisterAction extends Action {
 			String redirectTo = (String) session.getAttribute("redirectTo");
 			session.removeAttribute("redirectTo");
 			if (redirectTo != null) return redirectTo;
-			return "home.jsp";
+			return "profile.jsp";
 		} catch (DAOException e) {
 			errors.add(e.getMessage());
 			return "register.jsp";

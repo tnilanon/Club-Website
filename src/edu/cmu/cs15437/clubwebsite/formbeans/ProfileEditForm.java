@@ -4,7 +4,7 @@ import org.mybeans.form.FormBean;
 
 import java.util.*;
 
-public class RegisterForm extends FormBean {
+public class ProfileEditForm extends FormBean {
 	private String emailAddress			= null;
 	private String password				= null;
 	private String confirmPassword		= null;
@@ -29,10 +29,14 @@ public class RegisterForm extends FormBean {
 	public void setLastName(String s)		{ lastName = trimAndConvert(s, "<>&\'\"");	}
 	public void setSex(String s)			{ sex = s;									}
 	
-	// This is meant to be used in conjunction with LoginForm
-	// This method will only validate the parts not validated by LoginForm
+
 	public List< String > getValidationErrors() {
 		List< String > errors = new ArrayList< String >();
+		
+		
+		if (password == null || password.length() == 0) {
+			errors.add("Password cannot be empty");
+		}
 		
 		if (confirmPassword == null || confirmPassword.length() == 0 || ! confirmPassword.equals(password)) {
 			errors.add("Passwords do not match");

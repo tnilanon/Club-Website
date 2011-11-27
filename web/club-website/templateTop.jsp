@@ -13,7 +13,7 @@
 <%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean"%>
 
 <div id="Header">
-	<a href="http://www.cmubdc.org" title="CMU Ballroom">CMU Ballroom Dance Club</a>
+	<a href="home.jsp" title="CMU Ballroom">CMU Ballroom Dance Club</a>
 </div>
 
 <div id="linkbar">
@@ -58,7 +58,7 @@
 
   </ul>
 <br />
-	<a href="http://www.cmubdc.org" 
+	<a href="home.jsp" 
      title="CMU Ballroom"><img src="http://www.cmubdc.org/images/logo.jpg" width="110" /></a>
 </div>
 

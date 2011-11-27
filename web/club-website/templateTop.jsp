@@ -32,7 +32,7 @@
     <b><font color="white"><u>RESOURCES</u></font></b>
     <li>   <a href="profile.jsp">Profile</a>
     <li>   <a href="photos.jsp">Photos</a>
-    <li>   <a href="videos.jsp">Videos</a>
+    <li>   <a href="videosMy.jsp">Videos</a>
     <li><b><font color="white">---------------</font></b>
 <%	}  %>
     

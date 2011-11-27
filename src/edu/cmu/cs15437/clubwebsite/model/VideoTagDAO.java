@@ -82,21 +82,38 @@ public class VideoTagDAO {
 	}
 	
 	public List< Integer > videoIdsMatchingCategories(List< VideoCategoryBean > categories) {
-		MatchArg m = parseCategoriesIntoMatchArg(categories);
+		MatchArg m = parseCategoriesIntoOrMatchArg(categories);
 		List< VideoTagBean > videoTags = videoTagFactory.match(m);
-			List< Integer > videoIds = new ArrayList< Integer >(videoTags.size());
-			for (VideoTagBean videoTag : videoTags) {
-				videoIds.add(videoTag.getVideoId());
-			}
+		
+		Set< Integer > allNeeded = new HashSet< Integer >();
+		for (VideoCategoryBean category : categories) {
+			allNeeded.add(category.getCategoryId());
+		}
+		
+		Map< Integer, Set< Integer > > videoHas = new HashMap< Integer, HashSet< Integer > >();
+		for (VideoTagBean tag : videoTags) {
+			Set< Integer > s = videoHas.get(tag.videoId());
+			if (s == null)
+				s = new HashSet< Integer >();
+			s.add(tag.CategoryId());
+			videoHas.put(tag.videoId(), s);
+		}
+		
+		List< Integer > videoIds = new ArrayList< Integer >();
+		for (Map.Entry< Integer, Set< Integer > > entry : videoHas.entrySet()) {
+			if (allNeeded.equals(entry.getValue()))
+				videoIds.add(entry.getKey());
+		}
+		return videoIds;
 	}
 	
-	private MatchArg parseCategoriesIntoMatchArg(List< VideoCategoryBean > categories) {
+	private MatchArg parseCategoriesIntoOrMatchArg(List< VideoCategoryBean > categories) {
 		MatchArg m = null;
 		for (VideoCategoryBean category : categories) {
 			if (m == null)
 				m = MatchArg.equals("categoryId", category.getCategoryId());
 			else
-				m = MatchArg.and(m, MatchArg.equals("categoryId", category.getCategoryId()));
+				m = MatchArg.or(m, MatchArg.equals("categoryId", category.getCategoryId()));
 		}
 		return m;
 	}

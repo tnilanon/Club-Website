@@ -16,7 +16,6 @@
 }
 
 #linkbar { 
-/*	position: relative;*/
 	margin: 0px 0px 0px 0px; 
 	font-size: 100%; 
 	background-color: #900;
@@ -24,8 +23,6 @@
 	padding-top: 15px;
 	padding-left: 10px;
 	padding-bottom: 130%;
-/*	top: 7px; */
-/*	bottom: 1px;*/
 	float:left;
 	width:125px;
 }
@@ -38,8 +35,6 @@
 #linkbar a {color: #fff; font-size:14px}
 #linkbar a:hover {color: #666}
 #Content {
-/*	float:right;*/
-/*	width:500px;*/
 	min-width:500px;
 	margin:10px 10px 10px 135px; /* top, right, bottom, left */
 	padding:10px 10px 10px 10px;
@@ -49,9 +44,7 @@
 	min-width:500px;
 }
 #SubContentLeft {
-/*	float:left; */
 	max-width:600px;
-/*	margin-left:135px;*/
 	margin-right:410px;
 	padding:10px 10px 10px 10px;
 }
@@ -111,7 +104,7 @@ a {
 
 a:link {color:#0081e5;}
 a:visited {color:#0081e5;}
-a:hover {/*background-color:#eee;*/ color: #666}
+a:hover {/*background-color:#EEE;*/ color: #666}
 
 a.invisible {
 	display:none;

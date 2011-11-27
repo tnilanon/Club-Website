@@ -4,9 +4,9 @@
 <h1>Video Galleries</h1>
 
 <jsp:include page="videoNavigationBar.jsp" />
-<!-- 
+<%-- 
 <jsp:incluse page="listRecentlyAddedVideos.jsp" />
- -->
+ --%>
 
 </div>
 

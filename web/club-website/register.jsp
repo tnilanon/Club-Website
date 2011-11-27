@@ -1,8 +1,7 @@
-
 <jsp:include page="templateTop.jsp" />
 
 <div class="_form" id="registerForm">
-	<p style="font-size:x-large">Bookmarks!</p>
+	<p style="font-size:x-large">CMU Ballroom Dance Club</p>
 	<form method="POST" action="register.do">
 		<table class="centered">
 			<tr>

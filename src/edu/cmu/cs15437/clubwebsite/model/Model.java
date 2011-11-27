@@ -11,6 +11,9 @@ import java.io.File;
 public class Model {
 	private UserDAO userDAO;
 	private VideoDAO videoDAO;
+	private VideoCommentDAO videoCommentDAO;
+	private VideoCategoryDAO videoCategoryDAO;
+	private VideoTagDAO videoTagDAO;
 	
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -28,7 +31,10 @@ public class Model {
 			}
 			
 			userDAO = new UserDAO();
-			videoDAO = new VideoDAO();
+			videoCommentDAO = new VideoCommentDAO();
+			videoCategoryDAO = new VideoCategoryDAO();
+			videoTagDAO = new VideoTagDAO(videoCategoryDAO, userDAO);
+			videoDAO = new VideoDAO(videoTagDAO);
 		} catch (DAOException e) {
 			throw new ServletException(e);
 		}
@@ -40,6 +46,18 @@ public class Model {
 	
 	public VideoDAO getVideoDAO() {
 		return videoDAO;
+	}
+	
+	public VideoCommentDAO getVideoCommentDAO() {
+		return videoCommentDAO;
+	}
+	
+	public VideoCategoryDAO getVideoCategoryDAO() {
+		return videoCategoryDAO;
+	}
+	
+	public VideoTagDAO getVideoTagDAO() {
+		return videoTagDAO;
 	}
 }
 

@@ -5,12 +5,21 @@
 	<form method="POST" action="register.do">
 		<table class="centered">
 			<tr>
+				<td>User Name:</td>
+				<td><input type="text" name="userName" value="${param.userName}" id="username" /></td>
+			</tr>
+			<tr>
 				<td>First Name:</td>
 				<td><input type="text" name="firstName" value="${param.firstName}" id="firstname" /></td>
 			</tr>
 			<tr>
 				<td>Last Name:</td>
 				<td><input type="text" name="lastName" value="${param.lastName}" id="lastname" /></td>
+			</tr>
+			<tr>
+				<td>Sex:</td>
+				<td><input type="radio" name="sex" value="male" id="sex"/>Male
+					<input type="radio" name="sex" value="female" id="sex"/>Female</td>
 			</tr>
 			<tr>
 				<td>Confirm Password:</td>

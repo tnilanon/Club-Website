@@ -1,5 +1,7 @@
 package edu.cmu.cs15437.clubwebsite.databeans;
 
+import java.util.Date;
+
 public class VideoBean implements Comparable< VideoBean > {
 	private int videoId					= -1;
 	private int ownerId					= -1;

@@ -1,6 +1,5 @@
 <html>
 
-
 <head>
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="pragma" content="no-cache" />
@@ -9,25 +8,26 @@
 	<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
-
 <body>
-<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.User"%>
+
+<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean"%>
+
 <div id="Header">
 	<a href="http://www.cmubdc.org" title="CMU Ballroom">CMU Ballroom Dance Club</a>
 </div>
 
-
 <div id="linkbar">
   <ul>
-<%  User user = (User) session.getAttribute("user");
+<%  UserBean user = (UserBean) session.getAttribute("user");
 	if (user == null){  %>
 	<li><a href="home.jsp">Home</a>
 	<li>   <a href="login.do">Login</a><br /><br />
 <%	}
 	else{  %>
-	<li><%=user.getFirstName()%> <%=user.getLastName()%><br /><br />
+
+	<li><%=user.getUserName()%><br /><br />
 	<li><a href="home.jsp">Home</a>
-	<li><a href="logout.jsp">Logout</a><br /><br />
+	<li><a href="logout.do">Logout</a><br /><br />
     
     <b><font color="white"><u>RESOURCES</u></font></b>
     <li>   <a href="profile.jsp">Profile</a>

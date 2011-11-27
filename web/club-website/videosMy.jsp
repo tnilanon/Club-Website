@@ -3,6 +3,8 @@
 <div id="Content">
 <h1>Video Galleries</h1>
 
+<jsp:include page="videoNavigationBar.jsp" />
+
 
 </div>
 

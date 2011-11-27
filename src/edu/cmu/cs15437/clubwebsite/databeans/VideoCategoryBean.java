@@ -1,17 +1,20 @@
 package edu.cmu.cs15437.clubwebsite.databeans;
 
 public class VideoCategoryBean implements Comparable< VideoCategoryBean > {
-	private int categoryId		= -1;
-	private String description	= null;
+	private int categoryId			= -1;
+	private boolean linkedWithUser	= false;
+	private String description		= null;
 	
 	public VideoCategoryBean(int categoryId) {
 		this.categoryId = categoryId;
 	}
 	
-	public int getCategoryId()		{ return categoryId;	}
-	public String getDescription()	{ return description;	}
+	public int getCategoryId()			{ return categoryId;		}
+	public boolean isLinkedWithUser()	{ return linkedWithUser;	}
+	public String getDescription()		{ return description;		}
 	
-	public void setDescription(String s)	{ description = s;	}
+	public void setLinkedWithUser(boolean b)	{ linkedWithUser = b;	}
+	public void setDescription(String s)		{ description = s;		}
 	
 	public int compareTo(VideoCategoryBean other) {
 		// Order by recency
@@ -28,5 +31,6 @@ public class VideoCategoryBean implements Comparable< VideoCategoryBean > {
 	
 	public String toString() {
 		return "VideoCategory( " + String.valueOf(categoryId) + ", Description( " + description + " ) )";
+	}
 }
 

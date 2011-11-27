@@ -30,37 +30,43 @@ public class UserDAO {
 		return factory;
 	}
 	
-	public UserBean lookupUserName(String userName) throws DAOException {
+	public UserBean lookupWithUserName(String userName) throws DAOException {
 		try {
-			return factory.match(MatchArg("userName", userName));
+			return factory.match(MatchArg.equals("userName", userName))[0];
 		} catch (RollbackException e) {
 			throw new DAOException(e);
+		} finally {
+			return null;
 		}
 	}
 	
-	public UserBean lookupEmailAddress(String emailAddress) throws DAOException {
+	public UserBean lookupWithEmailAddress(String emailAddress) throws DAOException {
 		try {
-			return factory.match(MatchArg("emailAddress", emailAddress));
+			return factory.match(MatchArg.equals("emailAddress", emailAddress))[0];
 		} catch (RollbackException e) {
 			throw new DAOException(e);
+		} finally {
+			return null;
 		}
 	}
 	
-	public UserBean[] getAllUsers() throws DAOException {
+	public List< UserBean > getAllUsers() throws DAOException {
 		try {
 			UserBean[] users = factory.match();
 			Arrays.sort(users); // Sort using UserBean's compareTo()
-			return users;
+			return Arrays.asList(users);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
+		} finally {
+			return null;
 		}
 	}
 	
-	public UserBean create(UserBean user) throws DAOException {
+	public UserBean create(UserBean bean) throws DAOException {
 		try {
 			Transaction.begin();
 			UserBean dbUser = factory.create();
-			factory.copyInto(user, dbUser);
+			factory.copyInto(bean, dbUser);
 			Transaction.commit();
 			return dbUser;
 		} catch (RollbackException e) {
@@ -71,9 +77,16 @@ public class UserDAO {
 		}
 	}
 	
-	public boolean destroy(int userId) {
+	public boolean destroy(int userId) throws DAOException {
 		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
 			factory.delete(userId);
+			Transaction.commit();
+			return true;
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		} finally {

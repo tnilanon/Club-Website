@@ -1,5 +1,6 @@
 package edu.cmu.cs15437.clubwebsite.databeans;
 
+import java.util.Date;
 import java.util.Random;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -20,16 +21,16 @@ public class UserBean implements Comparable< UserBean > {
 		this.userId = userId;
 	}
 	
-	public int getUserId()					{ return userId;					}
-	public String getUserName()				{ return userName;					}
-	public String getEmailAddress()			{ return emailAddress;				}
-	public String getHashedPassword()		{ return hashedPassword;			}
-	public int getSalt()					{ return salt;						}
-	public String getFirstName()			{ return firstName;					}
-	public String getLastName()				{ return lastName;					}
-	public String getSex()					{ return sex;						}
-	public int getUserGroup()				{ return userGroup;					}
-	public Date getMembershipExpirationDate	{ return membershipExpirationDate;	}
+	public int getUserId()						{ return userId;					}
+	public String getUserName()					{ return userName;					}
+	public String getEmailAddress()				{ return emailAddress;				}
+	public String getHashedPassword()			{ return hashedPassword;			}
+	public int getSalt()						{ return salt;						}
+	public String getFirstName()				{ return firstName;					}
+	public String getLastName()					{ return lastName;					}
+	public String getSex()						{ return sex;						}
+	public int getUserGroup()					{ return userGroup;					}
+	public Date getMembershipExpirationDate()	{ return membershipExpirationDate;	}
 	
 	public void setUserName(String s)				{ userName = s;					}
 	public void setEmailAddress(String s)			{ emailAddress = s;				}

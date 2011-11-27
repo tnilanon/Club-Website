@@ -8,7 +8,7 @@ public class VideoBean implements Comparable< VideoBean > {
 	private int accessLevel				= -1;
 	private String link					= null;
 	private String description			= null;
-	private Date date					= null;
+	private long dateValue				= -1;
 	
 	public VideoBean(int videoId) {
 		this.videoId = videoId;
@@ -19,13 +19,13 @@ public class VideoBean implements Comparable< VideoBean > {
 	public int getAccessLevel()		{ return accessLevel;	}
 	public String getLink()			{ return link;			}
 	public String getDescription()	{ return description;	}
-	public Date getDate()			{ return date;			}
+	public long getDateValue()		{ return dateValue;		}
 	
 	public void setOwnerId(int i)			{ ownerId = i;		}
 	public void setAccessLevel(int i)		{ accessLevel = i;	}
 	public void setLink(String s)			{ link = s;			}
 	public void setDescription(String s)	{ description = s;	}
-	public void setDate(Date d)				{ date = d;			}
+	public void setDateValue(long l)		{ dateValue = l;	}
 	
 	public int compareTo(VideoBean other) {
 		// Order by recency

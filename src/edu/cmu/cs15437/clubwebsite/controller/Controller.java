@@ -19,6 +19,9 @@ public class Controller extends HttpServlet {
 		Action.add(new RegisterAction(model));
 		Action.add(new LoginAction(model));
 		Action.add(new LogoutAction(model));
+		
+		Action.add(new ProfileAction(model));
+		Action.add(new AddVideoAction(model));
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

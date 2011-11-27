@@ -6,6 +6,13 @@
 	<meta http-equiv="expires" content="0" />
 	<title>CMU Ballroom Dance Club</title>
 	<link rel="stylesheet" href="style.css" type="text/css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="./jquery.oembed.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("a.oembed").oembed();
+		});
+	</script>
 </head>
 
 <body>
@@ -30,7 +37,7 @@
 	<li><a href="logout.do">Logout</a><br /><br />
     
     <b><font color="white"><u>RESOURCES</u></font></b>
-    <li>   <a href="profile.jsp">Profile</a>
+    <li>   <a href="profile.do">Profile</a>
     <li>   <a href="photos.jsp">Photos</a>
     <li>   <a href="videos.jsp">Videos</a>
     <li><b><font color="white">---------------</font></b>

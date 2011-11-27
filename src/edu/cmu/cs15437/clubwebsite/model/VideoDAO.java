@@ -39,8 +39,6 @@ public class VideoDAO {
 			return videoFactory.lookup(videoId);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -51,8 +49,6 @@ public class VideoDAO {
 			return Arrays.asList(videos);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -64,19 +60,13 @@ public class VideoDAO {
 		return videos;
 	}
 	
-	public List< VideoBean > getVideosWithVideoCategories(List< VideoCategoryBean > categories) {
-		try {
-			if (categories.isEmpty()) {
-				return getAllVideos();
-			}
-			List< VideoBean > videos = getVideosWithVideoIds(videoTagDAO.videoIdsMatchingCategories(categories));
-			Collections.sort(videos); // Sort by recency
-			return videos;
-		} catch (RollbackException e) {
-			throw new DAOException(e);
-		} finally {
-			return null;
+	public List< VideoBean > getVideosWithVideoCategories(List< VideoCategoryBean > categories) throws DAOException {
+		if (categories.isEmpty()) {
+			return getAllVideos();
 		}
+		List< VideoBean > videos = getVideosWithVideoIds(videoTagDAO.videoIdsMatchingCategories(categories));
+		Collections.sort(videos); // Sort by recency
+		return videos;
 	}
 	
 	public List< VideoBean > getAllVideos() throws DAOException {
@@ -86,8 +76,6 @@ public class VideoDAO {
 			return Arrays.asList(videos);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -102,7 +90,6 @@ public class VideoDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return null;
 		}
 	}
 	
@@ -120,7 +107,6 @@ public class VideoDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -138,7 +124,6 @@ public class VideoDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -156,7 +141,6 @@ public class VideoDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -174,7 +158,6 @@ public class VideoDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -192,7 +175,6 @@ public class VideoDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 }

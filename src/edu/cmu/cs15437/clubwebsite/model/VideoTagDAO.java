@@ -41,8 +41,6 @@ public class VideoTagDAO {
 			return videoTagFactory.lookup(tagId);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -57,11 +55,10 @@ public class VideoTagDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return null;
 		}
 	}
 	
-	public boolean destroy(int tagId) {
+	public boolean destroy(int tagId) throws DAOException {
 		try {
 			Transaction.begin();
 			VideoTagBean dbVideoTag = videoTagFactory.lookup(tagId);
@@ -75,11 +72,10 @@ public class VideoTagDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
-	public String descriptionForTagId(int tagId) {
+	public String descriptionForTagId(int tagId) throws DAOException {
 		VideoCategoryBean category = videoCategoryDAO.lookupWithCategoryId(lookupWithTagId(tagId).getCategoryId());
 		if (category.isLinkedWithUser()) {
 			return userDAO.lookupWithUserId(category.getDescriptionUserId()).getDescription();
@@ -88,31 +84,35 @@ public class VideoTagDAO {
 		}
 	}
 	
-	public List< Integer > videoIdsMatchingCategories(List< VideoCategoryBean > categories) {
-		MatchArg m = parseCategoriesIntoOrMatchArg(categories);
-		List< VideoTagBean > videoTags = Arrays.asList(videoTagFactory.match(m));
-		
-		Set< Integer > allNeeded = new HashSet< Integer >();
-		for (VideoCategoryBean category : categories) {
-			allNeeded.add(category.getCategoryId());
+	public List< Integer > videoIdsMatchingCategories(List< VideoCategoryBean > categories) throws DAOException {
+		try {
+			MatchArg m = parseCategoriesIntoOrMatchArg(categories);
+			List< VideoTagBean > videoTags = Arrays.asList(videoTagFactory.match(m));
+			
+			Set< Integer > allNeeded = new HashSet< Integer >();
+			for (VideoCategoryBean category : categories) {
+				allNeeded.add(category.getCategoryId());
+			}
+			
+			Map< Integer, Set< Integer > > videoHas = new HashMap< Integer, Set< Integer > >();
+			for (VideoTagBean tag : videoTags) {
+				int id = tag.getVideoId();
+				Set< Integer > s = videoHas.get(id);
+				if (s == null)
+					s = new HashSet< Integer >();
+				s.add(tag.getCategoryId());
+				videoHas.put(id, s);
+			}
+			
+			List< Integer > videoIds = new ArrayList< Integer >();
+			for (Map.Entry< Integer, Set< Integer > > entry : videoHas.entrySet()) {
+				if (allNeeded.equals(entry.getValue()))
+					videoIds.add(entry.getKey());
+			}
+			return videoIds;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
 		}
-		
-		Map< Integer, Set< Integer > > videoHas = new HashMap< Integer, Set< Integer > >();
-		for (VideoTagBean tag : videoTags) {
-			int id = tag.getVideoId();
-			Set< Integer > s = videoHas.get(id);
-			if (s == null)
-				s = new HashSet< Integer >();
-			s.add(tag.getCategoryId());
-			videoHas.put(id, s);
-		}
-		
-		List< Integer > videoIds = new ArrayList< Integer >();
-		for (Map.Entry< Integer, Set< Integer > > entry : videoHas.entrySet()) {
-			if (allNeeded.equals(entry.getValue()))
-				videoIds.add(entry.getKey());
-		}
-		return videoIds;
 	}
 	
 	private MatchArg parseCategoriesIntoOrMatchArg(List< VideoCategoryBean > categories) {

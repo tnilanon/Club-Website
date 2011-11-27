@@ -56,7 +56,7 @@ public class LoginAction extends Action {
 			}
 						
 			// Look up the user
-			UserBean user = userDAO.lookupWithUserName(form.getUserName());
+			UserBean user = userDAO.lookupWithEmailAddress(form.getEmailAddress());
 			
 			if (form.getButton().equals("Register")) {
 				// User wants to register

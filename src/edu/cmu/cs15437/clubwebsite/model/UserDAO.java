@@ -35,28 +35,16 @@ public class UserDAO {
 			return factory.lookup(userId);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
-		}
-	}
-	
-	public UserBean lookupWithUserName(String userName) throws DAOException {
-		try {
-			return factory.match(MatchArg.equals("userName", userName))[0];
-		} catch (RollbackException e) {
-			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
 	public UserBean lookupWithEmailAddress(String emailAddress) throws DAOException {
 		try {
-			return factory.match(MatchArg.equals("emailAddress", emailAddress))[0];
+			UserBean[] users = factory.match(MatchArg.equals("emailAddress", emailAddress));
+			assert(users.length < 2);
+			return (users.length == 1)? users[0]: null;
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -67,16 +55,12 @@ public class UserDAO {
 			return Arrays.asList(users);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
 	public UserBean create(UserBean bean) throws DAOException {
 		try {
 			Transaction.begin();
-			if (lookupWithUserName(bean.getUserName()) != null)
-				throw new DAOException("User name already exists");
 			if (lookupWithEmailAddress(bean.getEmailAddress()) != null)
 				throw new DAOException("Email address already exists");
 			UserBean dbUser = factory.create();
@@ -87,7 +71,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return null;
 		}
 	}
 	
@@ -105,7 +88,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -123,7 +105,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -141,7 +122,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -159,7 +139,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -177,7 +156,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -195,7 +173,6 @@ public class UserDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 	
@@ -206,14 +183,13 @@ public class UserDAO {
 			if (dbUser == null) {
 				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
 			}
-			dbUser.setMembershipExpirationDate(newMembershipExpirationDate);
+			dbUser.setMembershipExpirationDateValue(newMembershipExpirationDate.getTime());
 			Transaction.commit();
 			return true;
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 }

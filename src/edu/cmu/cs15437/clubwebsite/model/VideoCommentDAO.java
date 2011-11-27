@@ -30,13 +30,11 @@ public class VideoCommentDAO {
 		return videoCommentFactory;
 	}
 	
-	public VideoCommentBean lookupWithCommentId(int commentId) {
+	public VideoCommentBean lookupWithCommentId(int commentId) throws DAOException {
 		try {
 			return videoCommentFactory.lookup(commentId);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -45,8 +43,6 @@ public class VideoCommentDAO {
 			return Arrays.asList(videoCommentFactory.match(MatchArg.equals("videoId", videoId)));
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -61,11 +57,10 @@ public class VideoCommentDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return null;
 		}
 	}
 	
-	public boolean destroy(int commentId) {
+	public boolean destroy(int commentId) throws DAOException {
 		try {
 			Transaction.begin();
 			VideoCommentBean dbVideoComment = videoCommentFactory.lookup(commentId);
@@ -79,7 +74,6 @@ public class VideoCommentDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 }

@@ -27,7 +27,7 @@
      set to the current working directory.
 -->
 
-<project name="CMU CS 15-437 HW4" default="compile" basedir=".">
+<project name="CMU CS 15-437 Final" default="compile" basedir=".">
 
 
 <!-- ===================== Property Definitions =========================== -->

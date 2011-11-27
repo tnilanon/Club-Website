@@ -61,9 +61,10 @@ public class RegisterAction extends Action {
 			user.setLastName(form.getLastName());
 			user.setSex(form.getSex());
 			user.setUserGroup(0);
-			user.setMembershipExpirationDate(Date());
+			user.setMembershipExpirationDateValue(new Date().getTime());
 			user.setPassword(form.getPassword());
-			userDAO.create(user);
+
+			user = userDAO.create(user);
 			
 			// Remeber the user
 			HttpSession session = request.getSession();

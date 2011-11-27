@@ -8,20 +8,26 @@ public class RegisterForm extends FormBean {
 	private String emailAddress			= null;
 	private String password				= null;
 	private String confirmPassword		= null;
+	private String userName				= null;
 	private String firstName			= null;
 	private String lastName				= null;
+	private String sex					= null;
 	
 	public String getEmailAddress()		{ return emailAddress;	}
 	public String getPassword()			{ return password;		}
 	public String getConfirmPassword()	{ return confirmPassword;	}
-	public String getFirstName()		{ return firstName;			}
-	public String getLastName()			{ return lastName;			}
+	public String getUserName()			{ return userName;		}
+	public String getFirstName()		{ return firstName;		}
+	public String getLastName()			{ return lastName;		}
+	public String getSex()				{ return sex;			}
 	
 	public void setEmailAddress(String s)	{ emailAddress = trimAndConvert(s, "<>&\'\"");	}
-	public void setPassword(String s)			{ password = s.trim();						}
+	public void setPassword(String s)		{ password = s.trim();						}
 	public void setConfirmPassword(String s)	{ confirmPassword = s.trim();				}
-	public void setFirstName(String s)			{ firstName = trimAndConvert(s, "<>&\'\"");	}
-	public void setLastName(String s)			{ lastName = trimAndConvert(s, "<>&\'\"");	}
+	public void setUserName(String s)		{ userName = trimAndConvert(s, "<>&\'\"");	}
+	public void setFirstName(String s)		{ firstName = trimAndConvert(s, "<>&\'\"");	}
+	public void setLastName(String s)		{ lastName = trimAndConvert(s, "<>&\'\"");	}
+	public void setSex(String s)			{ sex = s;									}
 	
 	// This is meant to be used in conjunction with LoginForm
 	// This method will only validate the parts not validated by LoginForm

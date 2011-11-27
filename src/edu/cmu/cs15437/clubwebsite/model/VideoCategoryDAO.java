@@ -30,13 +30,11 @@ public class VideoCategoryDAO {
 		return videoCategoryFactory;
 	}
 	
-	public VideoCategoryBean lookupWithCategoryId(int categoryId) {
+	public VideoCategoryBean lookupWithCategoryId(int categoryId) throws DAOException {
 		try {
 			return videoCategoryFactory.lookup(categoryId);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
-		} finally {
-			return null;
 		}
 	}
 	
@@ -51,11 +49,10 @@ public class VideoCategoryDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return null;
 		}
 	}
 	
-	public boolean destroy(int categoryId) {
+	public boolean destroy(int categoryId) throws DAOException {
 		try {
 			Transaction.begin();
 			VideoCategoryBean dbVideoCategory = videoCategoryFactory.lookup(categoryId);
@@ -69,7 +66,6 @@ public class VideoCategoryDAO {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
-			return false;
 		}
 	}
 }

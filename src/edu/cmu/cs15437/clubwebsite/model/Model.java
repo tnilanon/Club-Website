@@ -10,7 +10,7 @@ import java.io.File;
 
 public class Model {
 	private UserDAO userDAO;
-	private BookmarkDAO bookmarkDAO;
+	private VideoDAO videoDAO;
 	
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -28,7 +28,7 @@ public class Model {
 			}
 			
 			userDAO = new UserDAO();
-			bookmarkDAO = new BookmarkDAO();
+			videoDAO = new VideoDAO();
 		} catch (DAOException e) {
 			throw new ServletException(e);
 		}
@@ -38,8 +38,8 @@ public class Model {
 		return userDAO;
 	}
 	
-	public BookmarkDAO getBookmarkDAO() {
-		return bookmarkDAO;
+	public VideoDAO getVideoDAO() {
+		return videoDAO;
 	}
 }
 

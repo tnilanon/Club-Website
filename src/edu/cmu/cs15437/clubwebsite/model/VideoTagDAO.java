@@ -83,20 +83,21 @@ public class VideoTagDAO {
 	
 	public List< Integer > videoIdsMatchingCategories(List< VideoCategoryBean > categories) {
 		MatchArg m = parseCategoriesIntoOrMatchArg(categories);
-		List< VideoTagBean > videoTags = videoTagFactory.match(m);
+		List< VideoTagBean > videoTags = Arrays.asList(videoTagFactory.match(m));
 		
 		Set< Integer > allNeeded = new HashSet< Integer >();
 		for (VideoCategoryBean category : categories) {
 			allNeeded.add(category.getCategoryId());
 		}
 		
-		Map< Integer, Set< Integer > > videoHas = new HashMap< Integer, HashSet< Integer > >();
+		Map< Integer, Set< Integer > > videoHas = new HashMap< Integer, Set< Integer > >();
 		for (VideoTagBean tag : videoTags) {
-			Set< Integer > s = videoHas.get(tag.videoId());
+			int id = tag.getVideoId();
+			Set< Integer > s = videoHas.get(id);
 			if (s == null)
 				s = new HashSet< Integer >();
-			s.add(tag.CategoryId());
-			videoHas.put(tag.videoId(), s);
+			s.add(tag.getCategoryId());
+			videoHas.put(id, s);
 		}
 		
 		List< Integer > videoIds = new ArrayList< Integer >();

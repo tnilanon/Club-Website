@@ -57,7 +57,7 @@ public class VideoDAO {
 	}
 	
 	public List< VideoBean > getVideosWithVideoIds(List< Integer > videoIds) throws DAOException {
-		List< VideoBean > videos = new Arraylist< VideoBean >(videoIds.size());
+		List< VideoBean > videos = new ArrayList< VideoBean >(videoIds.size());
 		for (Integer videoId : videoIds) {
 			videos.add(lookupWithVideoId(videoId));
 		}

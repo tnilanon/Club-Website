@@ -1,24 +1,24 @@
 package edu.cmu.cs15437.clubwebsite.model;
 
-import edu.cmu.cs15437.clubwebsite.databeans.User;
+import edu.cmu.cs15437.clubwebsite.databeans.UserBean;
 
 import org.mybeans.dao.DAOException;
 import org.mybeans.factory.BeanTable;
 import org.mybeans.factory.BeanFactory;
 import org.mybeans.factory.BeanFactoryException;
-import org.mybeans.factory.DuplicateKeyException;
 import org.mybeans.factory.Transaction;
 import org.mybeans.factory.RollbackException;
+import org.mybeans.factory.MatchArg;
 
 import java.util.*;
 
 public class UserDAO {
-	private BeanFactory< User > factory;
+	private BeanFactory< UserBean > factory;
 	
 	public UserDAO() throws DAOException {
 		try {
-			BeanTable< User > table = BeanTable.getInstance(User.class, "tnilanon_clubwebsite_user");
-			if(! table.exists()) table.create("emailAddress");
+			BeanTable< UserBean > table = BeanTable.getInstance(UserBean.class, "clubweb_user");
+			if(! table.exists()) table.create("userId");
 			table.setIdleConnectionCleanup(true);
 			factory = table.getFactory();
 		} catch (BeanFactoryException e) {
@@ -26,56 +26,167 @@ public class UserDAO {
 		}
 	}
 	
-	protected BeanFactory< User > getFactory() {
+	protected BeanFactory< UserBean > getFactory() {
 		return factory;
 	}
 	
-	public User lookup(String emailAddress) throws DAOException {
+	public UserBean lookupUserName(String userName) throws DAOException {
 		try {
-			return factory.lookup(emailAddress);
+			return factory.match(MatchArg("userName", userName));
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		}
 	}
 	
-	public User[] getUsers() throws DAOException {
+	public UserBean lookupEmailAddress(String emailAddress) throws DAOException {
 		try {
-			User[] users = factory.match();
-			Arrays.sort(users); // Sort using User's compareTo()
+			return factory.match(MatchArg("emailAddress", emailAddress));
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public UserBean[] getAllUsers() throws DAOException {
+		try {
+			UserBean[] users = factory.match();
+			Arrays.sort(users); // Sort using UserBean's compareTo()
 			return users;
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		}
 	}
 	
-	public void create(User user) throws DAOException {
+	public UserBean create(UserBean user) throws DAOException {
 		try {
 			Transaction.begin();
-			User dbUser = factory.create(user.getEmailAddress());
+			UserBean dbUser = factory.create();
 			factory.copyInto(user, dbUser);
 			Transaction.commit();
-		} catch (DuplicateKeyException e) {
-			throw new DAOException("A user " + user.getEmailAddress() + " already exists");
+			return dbUser;
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
+			return null;
 		}
 	}
 	
-	public void setPassword(String emailAddress, String password) throws DAOException {
+	public boolean destroy(int userId) {
 		try {
-			Transaction.begin();
-			User dbUser = factory.lookup(emailAddress);
-			if (dbUser == null) {
-				throw new DAOException("User " + emailAddress + " does not exist");
-			}
-			dbUser.setPassword(password);
-			Transaction.commit();
+			factory.delete(userId);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
+			return false;
+		}
+	}
+	
+	public boolean updatePassword(int userId, String password) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setPassword(password);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+			return false;
+		}
+	}
+	
+	public boolean updateFirstName(int userId, String firstName) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setFirstName(firstName);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+			return false;
+		}
+	}
+	
+	public boolean updateLastName(int userId, String lastName) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setLastName(lastName);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+			return false;
+		}
+	}
+	
+	public boolean updateSex(int userId, String sex) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setSex(sex);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+			return false;
+		}
+	}
+	
+	public boolean updateUserGroup(int userId, int userGroup) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setUserGroup(userGroup);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+			return false;
+		}
+	}
+	
+	public boolean renewMembership(int userId, Date newMembershipExpirationDate) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setMembershipExpirationDate(newMembershipExpirationDate);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+			return false;
 		}
 	}
 }

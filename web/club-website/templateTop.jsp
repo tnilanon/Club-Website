@@ -7,12 +7,6 @@
 	<title>CMU Ballroom Dance Club</title>
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="./jquery.oembed.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("a.oembed").oembed();
-		});
-	</script>
 </head>
 
 <body>
@@ -20,7 +14,7 @@
 <%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean"%>
 
 <div id="Header">
-	<a href="http://www.cmubdc.org" title="CMU Ballroom">CMU Ballroom Dance Club</a>
+	<a href="http//www.cmubdc.org" title="CMU Ballroom">CMU Ballroom Dance Club</a>
 </div>
 
 <div id="linkbar">

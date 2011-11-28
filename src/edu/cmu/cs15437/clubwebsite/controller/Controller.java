@@ -46,7 +46,7 @@ public class Controller extends HttpServlet {
 			return Action.perform(action, request);
 		}
 		
-		if (user == null) {
+		if (user == null && ! action.equals("logout.do")) {
 			// User must login before performing privileged actions
 			return Action.perform("login.do", request);
 		}

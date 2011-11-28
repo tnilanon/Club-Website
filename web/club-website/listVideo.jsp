@@ -1,13 +1,13 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div id="videoList">
-
-<hr />
-
-<div><a href="http://www.flickr.com/photos/14516334@N00/345009210/" class="oembed">Flickr Image</a></div>
-<div><a href="http://vimeo.com/3108686" class="oembed">Vimeo Video</a></div>
-
-<hr />
-
 	<c:if test="${! empty(videoList)}">
+		<c:forEach var="video" items="${videoList}">
+			<div class="centered">
+				<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/${video.link}" frameborder="0">
+				</iframe>
+			</div>
+		</c:forEach>
 	</c:if>
 </div>

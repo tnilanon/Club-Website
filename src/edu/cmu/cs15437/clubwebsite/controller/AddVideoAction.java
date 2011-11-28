@@ -36,13 +36,14 @@ public class AddVideoAction extends Action {
 			
 			// No form is passed in; silently ignore
 			if (! form.isPresent()) {
-				return "profile.jsp";
+				return "/profile.do";
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			// If there is any error; let the user try again
 			if (errors.size() > 0) {
-				return "profile.jsp";
+				request.getSession().setAttribute("tempErrorList", errors);
+				return "/profile.do";
 			}
 			
 			UserBean user = (UserBean) request.getSession().getAttribute("user");
@@ -59,10 +60,12 @@ public class AddVideoAction extends Action {
 			return "/profile.do";
 		} catch(DAOException e) {
 			errors.add(e.getMessage());
-			return "profile.jsp";
+			request.getSession().setAttribute("tempErrorList", errors);
+			return "/profile.do";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "profile.jsp";
+			request.getSession().setAttribute("tempErrorList", errors);
+			return "/profile.do";
 		}
 	}
 }

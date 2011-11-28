@@ -17,10 +17,6 @@
 		<table class="centered">
 			<tr><td colspan="2"><center><strong>Edit Video Information</strong></center></td></tr>
 			<tr>
-				<td>Link:</td>
-				<td><input type="text" name="link" value="${param.link}" id="link" /></td>
-			</tr>
-			<tr>
 				<td>Description:</td>
 				<td><input type="text" name="description" value="${param.description}" id="description" /></td>
 			</tr>
@@ -42,7 +38,7 @@
 			</tr>
 		</table>
 		<br />
-		<input type="hidden" name="videoID" value="" id="videoID" />
+		<input type="hidden" name="videoId" value="" id="videoId" />
 		<input type="submit" name="button" style="width:11em" value="Update Info" id="updateVideo" />
 	</form>
 

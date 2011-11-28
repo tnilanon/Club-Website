@@ -33,8 +33,6 @@ public class ManageVideoAction extends Action {
 		
 		try {
 			VideoForm form = videoFormBeanFactory.create(request);
-			UserBean user = (UserBean) request.getSession().getAttribute("user");
-			VideoBean video = videoDAO.lookupWithVideoId(Integer.parseInt(form.getVideoId()));
 			
 			errors.addAll(form.getValidationErrors());
 			// If there is any error; let the user try again
@@ -43,10 +41,14 @@ public class ManageVideoAction extends Action {
 				return "/myVideos.do";
 			}
 			
-			// Only owner and admin can delete
+			int videoId = Integer.parseInt(form.getVideoId());
+			UserBean user = (UserBean) request.getSession().getAttribute("user");
+			VideoBean video = videoDAO.lookupWithVideoId(videoId);
+			
+			// Only owner and admin can delete / edit
 			if( (user.getUserId() == video.getOwnerId()) || (user.getUserGroup() == 5) ) {
 				if ( "Delete Video".equals(form.getButton()) ) {
-					videoDAO.destroy(Integer.parseInt(form.getVideoId()));
+					videoDAO.destroy(videoId);
 					return "/myVideos.do";
 				} else if ( "Edit Info".equals(form.getButton()) ) {
 					return "/editVideo.do";

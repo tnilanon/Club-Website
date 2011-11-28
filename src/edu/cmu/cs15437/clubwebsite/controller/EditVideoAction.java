@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybeans.dao.DAOException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import edu.cmu.cs15437.clubwebsite.databeans.UserBean;
+import edu.cmu.cs15437.clubwebsite.databeans.VideoBean;
 import edu.cmu.cs15437.clubwebsite.formbeans.EditVideoForm;
 import edu.cmu.cs15437.clubwebsite.model.Model;
 import edu.cmu.cs15437.clubwebsite.model.VideoDAO;
@@ -27,7 +30,10 @@ public class EditVideoAction extends Action {
 	}
 	
 	public String perform(HttpServletRequest request) {
-		List< String > errors = new ArrayList< String >();
+		HttpSession session = request.getSession();
+		List< String > errors = (List< String >) session.getAttribute("tempErrorList");
+		session.removeAttribute("tempErrorList");
+		if (errors == null) errors = new ArrayList< String >();
 		request.setAttribute("errors", errors);
 		
 		try {
@@ -45,6 +51,9 @@ public class EditVideoAction extends Action {
 				return "/editVideo.do";
 			}
 			
+			int videoId = Integer.parseInt(form.getVideoId());
+			UserBean user = (UserBean) request.getSession().getAttribute("user");
+			VideoBean video = videoDAO.lookupWithVideoId(videoId);
 			
 			int levelInt = -1;
 			String levelStr = form.getRadio();
@@ -53,13 +62,18 @@ public class EditVideoAction extends Action {
 			else if( levelStr.equals("3"))	levelInt = 3;
 			else if( levelStr.equals("4"))	levelInt = 4;
 			else if( levelStr.equals("5"))	levelInt = 5;
+			else {
+				errors.add("Invalid permission level");
+				request.getSession().setAttribute("tempErrorList", errors);
+				return "/editVideo.do";
+			}
 			
-			int videoID = Integer.parseInt(form.getVideoID());
-			videoDAO.updateAccessLevel(videoID, levelInt);
-			videoDAO.updateDate(videoID, new Date());
-			videoDAO.updateDescription(videoID, form.getDescription());
-			videoDAO.updateLink(videoID, form.extractVideoId());
-
+			// Only owner and admin can edit
+			if( (user.getUserId() == video.getOwnerId()) || (user.getUserGroup() == 5) ) {
+				videoDAO.updateAccessLevel(videoId, levelInt);
+				videoDAO.updateDate(videoId, new Date());
+				videoDAO.updateDescription(videoId, form.getDescription());
+			}
 			
 			return "/myVideos.do";
 		} catch(DAOException e) {

@@ -18,8 +18,13 @@
 				<td rowspan="15">
 					<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/<%=video.getLink()%>" frameborder="0">
 					</iframe></td>
-				<td><strong>User Name: </strong></td>
+				<td><form method="POST" action="manageVideo.do">
+					<input type="button" style="width:14em" value="Edit Info" id="editVideo" name="editVideo" />
+					<input type="button" style="width:14em" value="Delete Video" id="deleteVideo" name="deleteVideo" />
+					<input type="hidden" value="<%=video.getVideoId()%>" id="videoID" name="videoID" />
+				</form></td>
 			</tr>
+			<tr><td><strong>User Name: </strong></td></tr>
 			<tr><td><%=(userdao.lookupWithUserId(video.getOwnerId())).getUserName()%></td></tr>
 			<tr><td><strong>Description: </strong></td></tr>
 			<tr><td><%=video.getDescription()%></td></tr>

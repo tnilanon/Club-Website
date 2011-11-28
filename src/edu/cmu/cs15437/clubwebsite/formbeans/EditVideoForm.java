@@ -5,22 +5,28 @@ import org.mybeans.form.FormBean;
 import java.util.*;
 import java.util.regex.*;
 
-public class AddVideoForm extends FormBean {
+public class EditVideoForm extends FormBean {
 	private String link			= null;
 	private String description	= null;
 	private String radio		= null;
+	private String videoID		= null;
 	
 	private static Pattern pattern = Pattern.compile("v=([^&]{11})(?:&.*)?$");
 	
 	public String getLink()			{ return link;			}
 	public String getDescription()	{ return description;	}
 	public String getRadio()		{ return radio;			}
+	public String getVideoID()		{ return videoID;		}
+
 	
-	public void setLink(String s) 			{ link = s;										}
-	public void setDescription(String s)	{ description = trimAndConvert(s, "<>&\'\"");	}
-	public void setRadio(String s)		{ radio = s;	}
+	public void setLink(String s) 		{ link = s;			}
+	public void setComment(String s)	{ description = trimAndConvert(s, "<>&\'\"");	}
+	public void setRadio(String s)		{ radio = s;		}
+	public void setVideoID(String s)	{ videoID = s;		}
+	
 
 	public String extractVideoId() {
+		System.out.println(link);
 		Matcher m = pattern.matcher(link);
 		if (m.find())
 			return m.group(1);

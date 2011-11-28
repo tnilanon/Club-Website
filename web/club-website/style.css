@@ -170,6 +170,16 @@ input[type="submit"]
 	border: 1px solid #BEBEBE;
 }
 
+#myVideoListTable
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	text-align: left;
+	border: 1px solid #BEBEBE;
+}
+
 .bookmarkListRow:hover
 {
 	background-color: #FCC;
@@ -190,6 +200,15 @@ input[type="submit"]
 	margin-right: auto;
 	border: 1px solid #BEBEBE;
 	text-align: center;
+}
+
+._boxVideo
+{
+	background-color: #E0FFE0;
+	color: #191950;
+	margin-left: 0;
+	border: 1px solid #BEBEBE;
+	text-align: left;
 }
 
 #loginForm

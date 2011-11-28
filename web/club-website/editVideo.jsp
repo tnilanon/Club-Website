@@ -1,13 +1,21 @@
+<jsp:include page="templateTop.jsp" />
 
-<div class="_form" id="addVideoForm">
+<div id="Content">
+
+
+<jsp:include page="videoNavigationBar.jsp" />
+<br />
+
+
+<div class="_form" id="editVideoForm">
 
 <%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean" %>
 <%  UserBean user = (UserBean) session.getAttribute("user");  %>
 
-	<form method="POST" action="addVideo.do">
+	<form method="POST" action="editVideo.do">
 		<br />
 		<table class="centered">
-			<tr><td colspan="2"><center><strong>Upload Video</strong></center></td></tr>
+			<tr><td colspan="2"><center><strong>Edit Video Information</strong></center></td></tr>
 			<tr>
 				<td>Link:</td>
 				<td><input type="text" name="link" value="${param.link}" id="link" /></td>
@@ -34,9 +42,18 @@
 			</tr>
 		</table>
 		<br />
-		<input type="submit" name="button" style="width:11em" value="Add Video" id="addVideo" />
+		<input type="hidden" name="videoID" value="" id="videoID" />
+		<input type="submit" name="button" style="width:11em" value="Update Info" id="updateVideo" />
 	</form>
 
 <jsp:include page="errorMessage.jsp" />
 
 </div>
+
+
+
+</div>
+
+
+<jsp:include page="templateBottom.jsp" />
+

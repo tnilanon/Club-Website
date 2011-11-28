@@ -1,17 +1,23 @@
 package edu.cmu.cs15437.clubwebsite.model;
 
-import edu.cmu.cs15437.clubwebsite.databeans.VideoBean;
-import edu.cmu.cs15437.clubwebsite.databeans.VideoCategoryBean;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.mybeans.dao.DAOException;
-import org.mybeans.factory.BeanTable;
 import org.mybeans.factory.BeanFactory;
 import org.mybeans.factory.BeanFactoryException;
-import org.mybeans.factory.Transaction;
-import org.mybeans.factory.RollbackException;
+import org.mybeans.factory.BeanTable;
 import org.mybeans.factory.MatchArg;
+import org.mybeans.factory.RollbackException;
+import org.mybeans.factory.Transaction;
 
-import java.util.*;
+import edu.cmu.cs15437.clubwebsite.databeans.VideoBean;
+import edu.cmu.cs15437.clubwebsite.databeans.VideoCategoryBean;
 
 public class VideoDAO {
 	private BeanFactory< VideoBean > videoFactory;
@@ -72,7 +78,7 @@ public class VideoDAO {
 	public List< VideoBean > getAllVideos() throws DAOException {
 		try {
 			VideoBean[] videos = videoFactory.match();
-			Arrays.sort(videos); // Sort by recently
+			Arrays.sort(videos); // Sort by recency
 			return Arrays.asList(videos);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
@@ -91,7 +97,7 @@ public class VideoDAO {
 		});
 		
 		
-		screenAccess(videos,userGroup);
+		videos = screenAccess(videos,userGroup);
 		
 		if( videos.size() > videoCount )
 			return videos.subList(0, videoCount-1);
@@ -102,13 +108,14 @@ public class VideoDAO {
 	
 	
 	public List< VideoBean > screenAccess(List< VideoBean > list, int userGroup){
+		List< VideoBean > newlist = new ArrayList< VideoBean >(list.size());
 		Iterator<VideoBean> iter = list.iterator();
 		while (iter.hasNext()){
 			VideoBean video = iter.next();
-			if( video.getAccessLevel() > userGroup )
-				list.remove(video);
+			if( video.getAccessLevel() <= userGroup )
+				newlist.add(video);
 		}
-		return list;
+		return newlist;
 	}
 	
 	
@@ -126,7 +133,7 @@ public class VideoDAO {
 		}
 	}
 	
-	public boolean destroy(int videoId, int accessLevel) throws DAOException {
+	public boolean destroy(int videoId) throws DAOException {
 		try {
 			Transaction.begin();
 			VideoBean dbVideo = videoFactory.lookup(videoId);
@@ -210,5 +217,27 @@ public class VideoDAO {
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
+	
+	public boolean update(VideoBean bean) throws DAOException {
+        try {
+            Transaction.begin();
+            VideoBean dbBean = videoFactory.lookup(bean.getVideoId());
+            if (dbBean == null) {
+                throw new DAOException("This video does not exist: "+bean.getLink());
+            }
+            dbBean.setAccessLevel(bean.getAccessLevel());
+            dbBean.setDateValue(bean.getDateValue());
+            dbBean.setDescription(bean.getDescription());
+            dbBean.setLink(bean.getLink());
+            Transaction.commit();
+            return true;
+        } catch (RollbackException e) {
+            throw new DAOException(e);
+        } finally {
+            if (Transaction.isActive()) Transaction.rollback();
+        }
+    }
+
+
 }
 

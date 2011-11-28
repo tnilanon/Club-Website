@@ -1,6 +1,6 @@
 
 <div class="_form" id="videoNavigationBar">
-	<table class="centered" width="100%" style="text-align: center; border-collapse: collapse">
+	<table class="centered" width="100%" cellpadding="7" style="text-align: center; border-collapse: collapse">
 		<tr>
 			<td class="navigationBarItem" width="25%">
 				<a href="myVideos.do" id="myVideos">Uploaded Videos</a>

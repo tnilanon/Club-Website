@@ -1,30 +1,29 @@
 package edu.cmu.cs15437.clubwebsite.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import edu.cmu.cs15437.clubwebsite.model.Model;
-import edu.cmu.cs15437.clubwebsite.model.VideoDAO;
-import edu.cmu.cs15437.clubwebsite.databeans.UserBean;
-import edu.cmu.cs15437.clubwebsite.databeans.VideoBean;
-import edu.cmu.cs15437.clubwebsite.formbeans.AddVideoForm;
+import javax.servlet.http.HttpServletRequest;
 
 import org.mybeans.dao.DAOException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import java.util.*;
+import edu.cmu.cs15437.clubwebsite.formbeans.EditVideoForm;
+import edu.cmu.cs15437.clubwebsite.model.Model;
+import edu.cmu.cs15437.clubwebsite.model.VideoDAO;
 
-public class AddVideoAction extends Action {
-	private FormBeanFactory< AddVideoForm > addVideoFormBeanFactory = FormBeanFactory.getInstance(AddVideoForm.class);
-	
+public class EditVideoAction extends Action {
+	private FormBeanFactory< EditVideoForm > editVideoFormBeanFactory = FormBeanFactory.getInstance(EditVideoForm.class);
 	private VideoDAO videoDAO;
 	
-	public AddVideoAction(Model model) {
+	public EditVideoAction(Model model) {
 		videoDAO = model.getVideoDAO();
 	}
 	
 	public String getName() {
-		return "addVideo.do";
+		return "editVideo.do";
 	}
 	
 	public String perform(HttpServletRequest request) {
@@ -32,21 +31,21 @@ public class AddVideoAction extends Action {
 		request.setAttribute("errors", errors);
 		
 		try {
-			AddVideoForm form = addVideoFormBeanFactory.create(request);
+			EditVideoForm form = editVideoFormBeanFactory.create(request);
 			
 			// No form is passed in; silently ignore
 			if (! form.isPresent()) {
-				return "/myVideos.do";
+				return "editVideo.jsp";
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			// If there is any error; let the user try again
 			if (errors.size() > 0) {
 				request.getSession().setAttribute("tempErrorList", errors);
-				return "/myVideos.do";
+				return "/editVideo.do";
 			}
 			
-			UserBean user = (UserBean) request.getSession().getAttribute("user");
+			
 			int levelInt = -1;
 			String levelStr = form.getRadio();
 			if( levelStr.equals("1"))		levelInt = 1;
@@ -55,15 +54,12 @@ public class AddVideoAction extends Action {
 			else if( levelStr.equals("4"))	levelInt = 4;
 			else if( levelStr.equals("5"))	levelInt = 5;
 			
-			
-			// Add~
-			VideoBean bean = new VideoBean(-1);
-			bean.setOwnerId(user.getUserId());
-			bean.setAccessLevel(levelInt);
-			bean.setLink(form.extractVideoId());
-			bean.setDescription(form.getDescription());
-			bean.setDateValue(new Date().getTime());
-			videoDAO.create(bean);
+			int videoID = Integer.parseInt(form.getVideoID());
+			videoDAO.updateAccessLevel(videoID, levelInt);
+			videoDAO.updateDate(videoID, new Date());
+			videoDAO.updateDescription(videoID, form.getDescription());
+			videoDAO.updateLink(videoID, form.extractVideoId());
+
 			
 			return "/myVideos.do";
 		} catch(DAOException e) {

@@ -51,7 +51,9 @@ public class ManageVideoAction extends Action {
 					videoDAO.destroy(videoId);
 					return "/myVideos.do";
 				} else if ( "Edit Info".equals(form.getButton()) ) {
-					return "/editVideo.do";
+					request.setAttribute("description", video.getDescription());
+					request.setAttribute("radio", video.getAccessLevel());
+					return "editVideo.jsp";
 				}
 			}
 			

@@ -47,8 +47,7 @@ public class EditVideoAction extends Action {
 			errors.addAll(form.getValidationErrors());
 			// If there is any error; let the user try again
 			if (errors.size() > 0) {
-				request.getSession().setAttribute("tempErrorList", errors);
-				return "/editVideo.do";
+				return "editVideo.jsp";
 			}
 			
 			int videoId = Integer.parseInt(form.getVideoId());
@@ -64,8 +63,7 @@ public class EditVideoAction extends Action {
 			else if( levelStr.equals("5"))	levelInt = 5;
 			else {
 				errors.add("Invalid permission level");
-				request.getSession().setAttribute("tempErrorList", errors);
-				return "/editVideo.do";
+				return "editVideo.jsp";
 			}
 			
 			// Only owner and admin can edit

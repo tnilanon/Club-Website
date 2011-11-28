@@ -14,9 +14,9 @@ public class EditVideoForm extends FormBean {
 	public String getRadio()		{ return radio;			}
 	public String getVideoId()		{ return videoId;		}
 
-	public void setComment(String s)	{ description = trimAndConvert(s, "<>&\'\"");	}
-	public void setRadio(String s)		{ radio = s;		}
-	public void setVideoId(String s)	{ videoId = s;		}
+	public void setDescription(String s)	{ description = trimAndConvert(s, "<>&\'\"");	}
+	public void setRadio(String s)			{ radio = s;									}
+	public void setVideoId(String s)		{ videoId = s;									}
 	
 	public List< String > getValidationErrors() {
 		List< String > errors = new ArrayList< String >();

@@ -168,7 +168,7 @@ public class VideoDAO {
 			if (dbVideo == null) {
 				throw new DAOException("VideoBean " + String.valueOf(videoId) + " does not exist");
 			}
-			dbVideo.setDate(date);
+			dbVideo.setDateValue(date.getTime());
 			Transaction.commit();
 			return true;
 		} catch (RollbackException e) {

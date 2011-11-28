@@ -20,7 +20,10 @@ public class Controller extends HttpServlet {
 		Action.add(new RegisterAction(model));
 		Action.add(new LoginAction(model));
 		Action.add(new LogoutAction(model));
+
+		Action.add(new ProfileAction(model));
 		Action.add(new ProfileEditAction(model));
+		Action.add(new AddVideoAction(model));
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,7 +48,7 @@ public class Controller extends HttpServlet {
 			return Action.perform(action, request);
 		}
 		
-		if (user == null) {
+		if (user == null && ! action.equals("logout.do")) {
 			// User must login before performing privileged actions
 			return Action.perform("login.do", request);
 		}

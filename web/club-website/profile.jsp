@@ -61,6 +61,9 @@
 <br />
 
 
+<jsp:include page="addVideo.jsp" />
+
+<jsp:include page="listVideo.jsp" />
 
 </div>
 

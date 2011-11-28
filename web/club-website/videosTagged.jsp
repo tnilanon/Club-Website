@@ -1,7 +1,7 @@
 <jsp:include page="templateTop.jsp" />
 
 <div id="Content">
-<h1>Video Galleries</h1>
+<h1 align="center">My Videos</h1>
 
 <jsp:include page="videoNavigationBar.jsp" />
 <%-- 

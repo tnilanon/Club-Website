@@ -36,14 +36,14 @@ public class AddVideoAction extends Action {
 			
 			// No form is passed in; silently ignore
 			if (! form.isPresent()) {
-				return "/profile.do";
+				return "/myVideos.do";
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			// If there is any error; let the user try again
 			if (errors.size() > 0) {
 				request.getSession().setAttribute("tempErrorList", errors);
-				return "/profile.do";
+				return "/myVideos.do";
 			}
 			
 			UserBean user = (UserBean) request.getSession().getAttribute("user");
@@ -52,20 +52,20 @@ public class AddVideoAction extends Action {
 			VideoBean bean = new VideoBean(-1);
 			bean.setOwnerId(user.getUserId());
 			bean.setAccessLevel(user.getUserGroup());
-			bean.setLink(form.getLink());
+			bean.setLink(form.extractVideoId());
 			bean.setDescription(form.getDescription());
 			bean.setDateValue(new Date().getTime());
 			videoDAO.create(bean);
 			
-			return "/profile.do";
+			return "/myVideos.do";
 		} catch(DAOException e) {
 			errors.add(e.getMessage());
 			request.getSession().setAttribute("tempErrorList", errors);
-			return "/profile.do";
+			return "/myVideos.do";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			request.getSession().setAttribute("tempErrorList", errors);
-			return "/profile.do";
+			return "/myVideos.do";
 		}
 	}
 }

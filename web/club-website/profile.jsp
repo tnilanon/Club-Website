@@ -2,7 +2,8 @@
 
 <div id="Content">
 
-<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean" %>
 <%  UserBean user = (UserBean) session.getAttribute("user");  %>
 <%--	if (user == null){
 
@@ -48,12 +49,12 @@
 	</tr>
 	<tr>
 		<td>Membership Expiration :</td>
-		<td><%=user.getMembershipExpirationDateValue() %></td>
+		<td><%= new Date(user.getMembershipExpirationDateValue()) %></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><form method="POST" action="profileEdit.do">
-		<input type="submit" name="button" style="width:15em" value="Edit Profile" id="editProfile" />
-		</form></td>
+		<td colspan=2 align="center">
+			<input type="button" value="Edit Profile" onClick="parent.location='profileEdit.do'" />
+		</td>
 	</tr>
 </table>
 

@@ -10,7 +10,7 @@
 <hr />
 
 <h1 align="center">Uploaded Videos</h1>
-<jsp:include page="listVideo.jsp" />
+<jsp:include page="listMyVideo.jsp" />
 
 </div>
 

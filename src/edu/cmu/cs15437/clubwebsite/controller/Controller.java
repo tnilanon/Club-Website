@@ -27,6 +27,8 @@ public class Controller extends HttpServlet {
 		
 		Action.add(new MyVideosAction(model));
 		Action.add(new AddVideoAction(model));
+		Action.add(new ManageVideoAction(model));
+		Action.add(new EditVideoAction(model));
 		Action.add(new RecentlyAddedVideosAction(model));
 	}
 	

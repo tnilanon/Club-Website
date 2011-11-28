@@ -1,17 +1,23 @@
 package edu.cmu.cs15437.clubwebsite.model;
 
-import edu.cmu.cs15437.clubwebsite.databeans.VideoBean;
-import edu.cmu.cs15437.clubwebsite.databeans.VideoCategoryBean;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.mybeans.dao.DAOException;
-import org.mybeans.factory.BeanTable;
 import org.mybeans.factory.BeanFactory;
 import org.mybeans.factory.BeanFactoryException;
-import org.mybeans.factory.Transaction;
-import org.mybeans.factory.RollbackException;
+import org.mybeans.factory.BeanTable;
 import org.mybeans.factory.MatchArg;
+import org.mybeans.factory.RollbackException;
+import org.mybeans.factory.Transaction;
 
-import java.util.*;
+import edu.cmu.cs15437.clubwebsite.databeans.VideoBean;
+import edu.cmu.cs15437.clubwebsite.databeans.VideoCategoryBean;
 
 public class VideoDAO {
 	private BeanFactory< VideoBean > videoFactory;
@@ -127,7 +133,7 @@ public class VideoDAO {
 		}
 	}
 	
-	public boolean destroy(int videoId, int accessLevel) throws DAOException {
+	public boolean destroy(int videoId) throws DAOException {
 		try {
 			Transaction.begin();
 			VideoBean dbVideo = videoFactory.lookup(videoId);
@@ -211,5 +217,27 @@ public class VideoDAO {
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
+	
+	public boolean update(VideoBean bean) throws DAOException {
+        try {
+            Transaction.begin();
+            VideoBean dbBean = videoFactory.lookup(bean.getVideoId());
+            if (dbBean == null) {
+                throw new DAOException("This video does not exist: "+bean.getLink());
+            }
+            dbBean.setAccessLevel(bean.getAccessLevel());
+            dbBean.setDateValue(bean.getDateValue());
+            dbBean.setDescription(bean.getDescription());
+            dbBean.setLink(bean.getLink());
+            Transaction.commit();
+            return true;
+        } catch (RollbackException e) {
+            throw new DAOException(e);
+        } finally {
+            if (Transaction.isActive()) Transaction.rollback();
+        }
+    }
+
+
 }
 

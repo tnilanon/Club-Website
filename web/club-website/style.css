@@ -219,7 +219,6 @@ input[type="submit"]
 	margin-bottom: 15%;
 }
 
-
 #registerForm
 {
 	width: 24em;
@@ -229,7 +228,7 @@ input[type="submit"]
 
 #profileEditForm
 {
-	width: 24em;
+	width: 30em;
 	margin-top: 10%;
 	margin-bottom: 10%;
 }

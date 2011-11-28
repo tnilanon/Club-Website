@@ -6,10 +6,10 @@
 
 	}  --%>
 	
-<div class="Content">
+<div id="Content">
 	
 <div class="_form" id="profileEditForm">
-	<p style="font-size:x-large">Edit Profile</p>
+	<p style="font-size:x-large; margin: 2em 0 1em 0;">Edit Profile</p>
 	<form method="POST" action="profileEdit.do">
 		<table class="centered">
 		<tr>

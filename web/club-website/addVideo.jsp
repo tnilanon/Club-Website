@@ -7,6 +7,7 @@
 	<form method="POST" action="addVideo.do">
 		<br />
 		<table class="centered">
+			<tr><td colspan="2"><center><strong>Upload Video</strong></center></td></tr>
 			<tr>
 				<td>Link:</td>
 				<td><input type="text" name="link" value="${param.link}" id="link" /></td>

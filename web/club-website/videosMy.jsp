@@ -2,7 +2,10 @@
 
 <div id="Content">
 
+
 <jsp:include page="videoNavigationBar.jsp" />
+<br />
+
 <jsp:include page="addVideo.jsp" />
 <hr />
 

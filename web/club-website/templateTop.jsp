@@ -31,8 +31,8 @@
 	<li><a href="logout.do">Logout</a><br /><br />
     
     <b><font color="white"><u>RESOURCES</u></font></b>
-    <li>   <a href="profile.jsp">Profile</a>
-    <li>   <a href="photos.jsp">Photos</a>
+    <li>   <a href="myProfile.do">Profile</a>
+    <li>   <a href="#">Photos</a>
     <li>   <a href="myVideos.do">Videos</a>
     <li><b><font color="white">---------------</font></b>
 <%	}  %>

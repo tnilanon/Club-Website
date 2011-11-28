@@ -72,11 +72,29 @@ public class VideoDAO {
 	public List< VideoBean > getAllVideos() throws DAOException {
 		try {
 			VideoBean[] videos = videoFactory.match();
-			Arrays.sort(videos); // Sort by recency
+			Arrays.sort(videos); // Sort by recently
 			return Arrays.asList(videos);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
 		}
+	}
+	
+	public List< VideoBean > getRecentlyAddedVideos(int videoCount, int accessLevel) throws DAOException {
+		List< VideoBean > videos = getAllVideos();
+		Collections.sort(videos, new Comparator<VideoBean>() {
+
+			@Override
+			public int compare(VideoBean o1, VideoBean o2) {
+				return (int)(o2.getDateValue() - o1.getDateValue());
+			}
+			
+		});
+		// To do: check access Level
+		
+		if( videos.size() > videoCount )
+			return videos.subList(0, videoCount-1);
+		else
+			return videos;
 	}
 	
 	public VideoBean create(VideoBean bean) throws DAOException {

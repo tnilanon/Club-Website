@@ -6,7 +6,7 @@
 				<a href="myVideos.do" id="myVideos">Uploaded Videos</a>
 			</td>
 			<td class="navigationBarItem" width="25%">
-				<a href="RecentVideos.do" id="recentlyAddedVideos">Recently Added Videos</a>
+				<a href="recentlyAddedVideos.do" id="recentlyAddedVideos">Recently Added Videos</a>
 			</td>
 			<td class="navigationBarItem" width="25%">
 				<a href="videosTagged.jsp" id="taggedVideos">My Videos</a>

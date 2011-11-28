@@ -21,12 +21,12 @@ public class Controller extends HttpServlet {
 		Action.add(new LoginAction(model));
 		Action.add(new LogoutAction(model));
 
-		Action.add(new MyProfileAction(model));
 		Action.add(new ProfileEditAction(model));
 		Action.add(new ChangePasswordAction(model));
 		
 		Action.add(new MyVideosAction(model));
 		Action.add(new AddVideoAction(model));
+		Action.add(new RecentlyAddedVideosAction(model));
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

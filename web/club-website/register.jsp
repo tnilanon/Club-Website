@@ -18,8 +18,8 @@
 			</tr>
 			<tr>
 				<td>Sex:</td>
-				<td><input type="radio" name="sex" value="male" id="sex"/>Male
-					<input type="radio" name="sex" value="female" id="sex"/>Female</td>
+				<td><input type="radio" name="sex" value="Male" id="sex"/>Male
+					<input type="radio" name="sex" value="Female" id="sex"/>Female</td>
 			</tr>
 			<tr>
 				<td>Confirm Password:</td>

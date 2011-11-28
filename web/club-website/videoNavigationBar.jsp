@@ -3,7 +3,7 @@
 	<table class="centered" width="100%" style="text-align: center; border-collapse: collapse">
 		<tr>
 			<td class="navigationBarItem" width="25%">
-				<a href="myVideos.do" id="myVideos">My Videos</a>
+				<a href="myVideos.do" id="myVideos">Uploaded Videos</a>
 			</td>
 			<td class="navigationBarItem" width="25%">
 				<a href="RecentVideos.do" id="recentlyAddedVideos">Recently Added Videos</a>

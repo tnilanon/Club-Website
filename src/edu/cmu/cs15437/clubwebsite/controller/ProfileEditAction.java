@@ -36,13 +36,8 @@ public class ProfileEditAction extends Action {
 			
 			// No form is passed in; let the user try again
 			if (! form.isPresent()) {
-				System.out.println("No form is passed in");
 				return "profileEdit.jsp";
 			}
-			System.out.println(form.getFirstName());
-			System.out.println(form.getLastName());
-			System.out.println(form.getSex());
-			System.out.println(form.getUserName());
 			
 			if (form.getButton().equals("Change Password")) {
 				// User wants to change password

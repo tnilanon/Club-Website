@@ -14,11 +14,10 @@ public class AddVideoForm extends FormBean {
 	public String getLink()			{ return link;			}
 	public String getDescription()	{ return description;	}
 	
-	public void setLink(String s) 		{ link = s;										}
-	public void setComment(String s)	{ description = trimAndConvert(s, "<>&\'\"");	}
+	public void setLink(String s) 			{ link = s;										}
+	public void setDescription(String s)	{ description = trimAndConvert(s, "<>&\'\"");	}
 	
 	public String extractVideoId() {
-		System.out.println(link);
 		Matcher m = pattern.matcher(link);
 		if (m.find())
 			return m.group(1);

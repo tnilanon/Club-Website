@@ -2,7 +2,8 @@
 
 <div id="Content">
 
-<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean" %>
 <%  UserBean user = (UserBean) session.getAttribute("user");  %>
 <%--	if (user == null){
 
@@ -48,7 +49,7 @@
 	</tr>
 	<tr>
 		<td>Membership Expiration :</td>
-		<td><%=user.getMembershipExpirationDateValue() %></td>
+		<td><%= new Date(user.getMembershipExpirationDateValue()) %></td>
 	</tr>
 	<tr>
 		<td colspan=2 align="center">

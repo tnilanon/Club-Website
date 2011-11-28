@@ -24,7 +24,7 @@ public class ManageVideoAction extends Action {
 	}
 	
 	public String getName() {
-		return "/manageVideo.do";
+		return "manageVideo.do";
 	}
 	
 	public String perform(HttpServletRequest request) {
@@ -32,19 +32,25 @@ public class ManageVideoAction extends Action {
 		request.setAttribute("errors", errors);
 		
 		try {
-			
 			VideoForm form = videoFormBeanFactory.create(request);
 			UserBean user = (UserBean) request.getSession().getAttribute("user");
-			VideoBean video = videoDAO.lookupWithVideoId(Integer.parseInt(form.getVideoID()));
+			VideoBean video = videoDAO.lookupWithVideoId(Integer.parseInt(form.getVideoId()));
 			
-			if( form.getButton().equals("deleteVideo") ){
-				// Only owner and admin can delete
-				if( (user.getUserId()==video.getOwnerId()) || (user.getUserGroup()==5) )
-					videoDAO.destroy(Integer.parseInt(form.getVideoID()));
-				return "/myVideo.do";
+			errors.addAll(form.getValidationErrors());
+			// If there is any error; let the user try again
+			if (errors.size() > 0) {
+				request.getSession().setAttribute("tempErrorList", errors);
+				return "/myVideos.do";
 			}
-			else if( form.getButton().equals("editVideo") ){
-				return "/editVideo.do";
+			
+			// Only owner and admin can delete
+			if( (user.getUserId() == video.getOwnerId()) || (user.getUserGroup() == 5) ) {
+				if ( "Delete Video".equals(form.getButton()) ) {
+					videoDAO.destroy(Integer.parseInt(form.getVideoId()));
+					return "/myVideos.do";
+				} else if ( "Edit Info".equals(form.getButton()) ) {
+					return "/editVideo.do";
+				}
 			}
 			
 			return "/myVideos.do";

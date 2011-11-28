@@ -72,7 +72,7 @@ public class VideoDAO {
 	public List< VideoBean > getAllVideos() throws DAOException {
 		try {
 			VideoBean[] videos = videoFactory.match();
-			Arrays.sort(videos); // Sort by recently
+			Arrays.sort(videos); // Sort by recency
 			return Arrays.asList(videos);
 		} catch (RollbackException e) {
 			throw new DAOException(e);
@@ -91,7 +91,7 @@ public class VideoDAO {
 		});
 		
 		
-		screenAccess(videos,userGroup);
+		videos = screenAccess(videos,userGroup);
 		
 		if( videos.size() > videoCount )
 			return videos.subList(0, videoCount-1);
@@ -102,13 +102,14 @@ public class VideoDAO {
 	
 	
 	public List< VideoBean > screenAccess(List< VideoBean > list, int userGroup){
+		List< VideoBean > newlist = new ArrayList< VideoBean >(list.size());
 		Iterator<VideoBean> iter = list.iterator();
 		while (iter.hasNext()){
 			VideoBean video = iter.next();
-			if( video.getAccessLevel() > userGroup )
-				list.remove(video);
+			if( video.getAccessLevel() <= userGroup )
+				newlist.add(video);
 		}
-		return list;
+		return newlist;
 	}
 	
 	

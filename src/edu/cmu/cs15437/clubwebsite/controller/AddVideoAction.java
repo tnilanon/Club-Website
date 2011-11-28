@@ -47,11 +47,19 @@ public class AddVideoAction extends Action {
 			}
 			
 			UserBean user = (UserBean) request.getSession().getAttribute("user");
+			int levelInt = -1;
+			String levelStr = form.getRadio();
+			if( levelStr.equals("1"))		levelInt = 1;
+			else if( levelStr.equals("2"))	levelInt = 2;
+			else if( levelStr.equals("3"))	levelInt = 3;
+			else if( levelStr.equals("4"))	levelInt = 4;
+			else if( levelStr.equals("5"))	levelInt = 5;
+			
 			
 			// Add~
 			VideoBean bean = new VideoBean(-1);
 			bean.setOwnerId(user.getUserId());
-			bean.setAccessLevel(user.getUserGroup());
+			bean.setAccessLevel(levelInt);
 			bean.setLink(form.extractVideoId());
 			bean.setDescription(form.getDescription());
 			bean.setDateValue(new Date().getTime());
@@ -68,5 +76,6 @@ public class AddVideoAction extends Action {
 			return "/myVideos.do";
 		}
 	}
+
 }
 

@@ -79,7 +79,7 @@ public class VideoDAO {
 		}
 	}
 	
-	public List< VideoBean > getRecentlyAddedVideos(int videoCount, int accessLevel) throws DAOException {
+	public List< VideoBean > getRecentlyAddedVideos(int videoCount, int userGroup) throws DAOException {
 		List< VideoBean > videos = getAllVideos();
 		Collections.sort(videos, new Comparator<VideoBean>() {
 
@@ -89,13 +89,28 @@ public class VideoDAO {
 			}
 			
 		});
-		// To do: check access Level
+		
+		
+		screenAccess(videos,userGroup);
 		
 		if( videos.size() > videoCount )
 			return videos.subList(0, videoCount-1);
 		else
 			return videos;
+		
 	}
+	
+	
+	public List< VideoBean > screenAccess(List< VideoBean > list, int userGroup){
+		Iterator<VideoBean> iter = list.iterator();
+		while (iter.hasNext()){
+			VideoBean video = iter.next();
+			if( video.getAccessLevel() > userGroup )
+				list.remove(video);
+		}
+		return list;
+	}
+	
 	
 	public VideoBean create(VideoBean bean) throws DAOException {
 		try {

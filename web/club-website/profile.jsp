@@ -53,6 +53,10 @@
 	</tr>
 	<tr>
 		<td colspan=2 align="center">
+			<br />
+		</td>
+	</tr>	<tr>
+		<td colspan=2 align="center">
 			<input type="button" value="Edit Profile" onClick="parent.location='profileEdit.do'" />
 		</td>
 	</tr>

@@ -30,12 +30,12 @@
 		<tr>
 			<td>Sex:</td>
 			<td>
-			<% if( user.getSex().equals("male") ){ %>
-				<input type="radio" name="sex" value="male" id="sex" checked/>Male
-				<input type="radio" name="sex" value="female" id="sex"/>Female
+			<% if( user.getSex().equals("Male") ){ %>
+				<input type="radio" name="sex" value="Male" id="sex" checked/>Male
+				<input type="radio" name="sex" value="Female" id="sex"/>Female
 			<% } else { %>
-				<input type="radio" name="sex" value="male" id="sex" />Male
-				<input type="radio" name="sex" value="female" id="sex" checked/>Female
+				<input type="radio" name="sex" value="Male" id="sex" />Male
+				<input type="radio" name="sex" value="Female" id="sex" checked/>Female
 			<% }  %>
 			</td>
 		</tr>

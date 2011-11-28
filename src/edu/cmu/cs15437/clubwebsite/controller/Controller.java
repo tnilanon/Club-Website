@@ -27,6 +27,7 @@ public class Controller extends HttpServlet {
 		
 		Action.add(new MyVideosAction(model));
 		Action.add(new AddVideoAction(model));
+		Action.add(new RecentlyAddedVideosAction(model));
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

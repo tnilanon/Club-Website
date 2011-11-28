@@ -46,6 +46,7 @@ public class LoginAction extends Action {
 			
 			// No form is passed in; let the user try again
 			if (! form.isPresent()) {
+				System.out.println("No form is passed in");
 				return "login.jsp";
 			}
 			

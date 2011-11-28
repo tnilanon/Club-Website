@@ -25,7 +25,6 @@ public class ProfileEditForm extends FormBean {
 	public void setLastName(String s)		{ lastName = trimAndConvert(s, "<>&\'\"");	}
 	public void setSex(String s)			{ sex = s;									}
 	public void setButton(String s)			{ button = s;								}
-	
 
 	public List< String > getValidationErrors() {
 		List< String > errors = new ArrayList< String >();
@@ -42,8 +41,10 @@ public class ProfileEditForm extends FormBean {
 			errors.add("Last name cannot be empty");
 		}
 		
-		if(sex == null || sex.length() == 0) {
+		if (sex == null || sex.length() == 0) {
 			errors.add("Sex must be selcted");
+		} else if (! (sex.equals("Male") || sex.equals("Female"))) {
+			errors.add("Unfortunately our website only support biological sex at the moment. Please check back later");
 		}
 		
 		if (button == null || ! (button.equals("Submit Changes") || button.equals("Change Password"))) {

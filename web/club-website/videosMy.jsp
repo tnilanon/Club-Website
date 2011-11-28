@@ -4,11 +4,13 @@
 <h1>Video Galleries</h1>
 
 <jsp:include page="videoNavigationBar.jsp" />
-<%--  
-<jsp:include page="addVideos.jsp" />
+
+
+<jsp:include page="addVideo.jsp" />
+
 <hr />
-<jsp:include page="listMyVideos.jsp" />
---%>
+
+<jsp:include page="listVideo.jsp" />
 
 </div>
 

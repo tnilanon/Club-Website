@@ -11,15 +11,15 @@ import org.mybeans.dao.DAOException;
 
 import java.util.*;
 
-public class ProfileAction extends Action {
+public class MyVideosAction extends Action {
 	private VideoDAO videoDAO;
 	
-	public ProfileAction(Model model) {
+	public MyVideosAction(Model model) {
 		videoDAO = model.getVideoDAO();
 	}
 	
 	public String getName() {
-		return "profile.do";
+		return "myVideos.do";
 	}
 	
 	public String perform(HttpServletRequest request) {
@@ -34,10 +34,10 @@ public class ProfileAction extends Action {
 			request.setAttribute("listType", "myVideos");
 			request.setAttribute("videoList", videoDAO.getUserVideos(user.getUserId()));
 			
-			return "profile.jsp";
+			return "videosMy.jsp";
 		} catch(DAOException e) {
 			errors.add(e.getMessage());
-			return "profile.jsp";
+			return "videosMy.jsp";
 		}
 	}
 }

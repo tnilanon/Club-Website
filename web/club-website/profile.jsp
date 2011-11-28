@@ -60,11 +60,6 @@
 <br />
 <br />
 
-
-<jsp:include page="addVideo.jsp" />
-
-<jsp:include page="listVideo.jsp" />
-
 </div>
 
 <jsp:include page="templateBottom.jsp" />

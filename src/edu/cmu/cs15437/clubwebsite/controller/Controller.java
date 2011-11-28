@@ -30,6 +30,8 @@ public class Controller extends HttpServlet {
 		Action.add(new ManageVideoAction(model));
 		Action.add(new EditVideoAction(model));
 		Action.add(new RecentlyAddedVideosAction(model));
+		
+		Action.add(new AdmitMemberAction(model));
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

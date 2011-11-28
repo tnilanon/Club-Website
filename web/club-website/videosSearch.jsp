@@ -4,9 +4,11 @@
 
 
 <jsp:include page="videoNavigationBar.jsp" />
-<%--
-<jsp:include page="videoSearch.jsp" />
- --%>
+<br />
+
+
+<jsp:include page="searchBox.jsp" />
+
 <hr />
 
 <h1 align="center">Search Result</h1>

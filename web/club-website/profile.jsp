@@ -37,12 +37,12 @@
 		<%
 		String group;
 		switch (user.getUserGroup()){
-			case 1: group = "Basic Membership";
-			case 2: group = "Advanced Membership";
-			case 3: group = "Competition Team Member";
-			case 4: group = "Officer";
-			case 5: group = "Administrator";
-			default: group = "Pending for Approval";
+			case 1: group = "Basic Membership";			break;
+			case 2: group = "Advanced Membership";		break;
+			case 3: group = "Competition Team Member";	break;
+			case 4: group = "Officer";					break;
+			case 5: group = "Administrator";			break;
+			default: group = "Pending for Approval";	
 		}
 		%>
 		<td><%=group%></td>

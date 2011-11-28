@@ -62,7 +62,7 @@ public class UserDAO {
 		try {
 			Transaction.begin();
 			if (lookupWithEmailAddress(bean.getEmailAddress()) != null)
-				throw new DAOException("Email address already exists");
+				throw new DAOException("UserDAO: Email address already exists");
 			UserBean dbUser = factory.create();
 			factory.copyInto(bean, dbUser);
 			Transaction.commit();
@@ -150,6 +150,24 @@ public class UserDAO {
 				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
 			}
 			dbUser.setSex(sex);
+			Transaction.commit();
+			return true;
+		} catch (RollbackException e) {
+			throw new DAOException(e);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
+	}
+	
+
+	public boolean updateUserName(int userId, String userName) throws DAOException {
+		try {
+			Transaction.begin();
+			UserBean dbUser = factory.lookup(userId);
+			if (dbUser == null) {
+				throw new DAOException("UserBean " + String.valueOf(userId) + " does not exist");
+			}
+			dbUser.setUserName(userName);
 			Transaction.commit();
 			return true;
 		} catch (RollbackException e) {

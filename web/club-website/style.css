@@ -5,7 +5,7 @@
 	border-color:black;
 	border-width:0px 0px; /* top and bottom borders: 0px; left and right borders: 0px */
 	line-height:35px;
-	background-color:#900;
+	background-color:#B90000;
 	font-size:80%;
 	height:55px;
 }
@@ -18,7 +18,7 @@
 #linkbar { 
 	margin: 0px 0px 0px 0px; 
 	font-size: 100%; 
-	background-color: #900;
+	background-color:#B90000;
 	font-size: 16px;
 	padding-top: 15px;
 	padding-left: 10px;
@@ -38,6 +38,7 @@
 	min-width:500px;
 	margin:10px 10px 10px 135px; /* top, right, bottom, left */
 	padding:10px 10px 10px 10px;
+	background-color:white;
 }
 #Content p {margin:0px; }
 #SubContent {
@@ -68,7 +69,6 @@ body {
 h1 {
 	padding:0px;
 	font-size:18px;
-	/*line-height:28px;*/
 	font-weight:800;
 	color:#000;
 }
@@ -207,11 +207,11 @@ input[type="submit"]
 	margin-bottom: 10%;
 }
 
-#addBookmarkForm
+#profileEditForm
 {
-	width: 20em;
-	margin-top: 5%;
-	margin-bottom: 0;
+	width: 24em;
+	margin-top: 10%;
+	margin-bottom: 10%;
 }
 
 #footer

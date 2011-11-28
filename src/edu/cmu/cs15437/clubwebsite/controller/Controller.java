@@ -11,6 +11,7 @@ import edu.cmu.cs15437.clubwebsite.databeans.UserBean;
 
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class Controller extends HttpServlet {
 
 	public void init() throws ServletException {
@@ -19,6 +20,7 @@ public class Controller extends HttpServlet {
 		Action.add(new RegisterAction(model));
 		Action.add(new LoginAction(model));
 		Action.add(new LogoutAction(model));
+		Action.add(new ProfileEditAction(model));
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,14 +1,16 @@
 <jsp:include page="templateTop.jsp" />
 
 <div id="Content">
-<h1>My Profile</h1>
 
 <%@ page import="edu.cmu.cs15437.clubwebsite.databeans.UserBean"%>
 <%  UserBean user = (UserBean) session.getAttribute("user");  %>
 <%--	if (user == null){
 
 	}  --%>
-<table>
+<table class="centered">
+	<tr>
+		<td colspan="2" align="center"><h1>My Profile</h1></td>
+	</tr>
 	<tr>
 		<td>User Name :</td>
 		<td><%=user.getUserName()%></td>
@@ -48,14 +50,17 @@
 		<td>Membership Expiration :</td>
 		<td><%=user.getMembershipExpirationDateValue() %></td>
 	</tr>
+	<tr>
+		<td colspan="2" align="center"><form method="POST" action="profileEdit.do">
+		<input type="submit" name="button" style="width:15em" value="Edit Profile" id="editProfile" />
+		</form></td>
+	</tr>
 </table>
 
 <br />
 <br />
 
-<form method="POST" action="profileEdit.do">
-	<input type="submit" name="button" style="width:13em" value="Edit Profile" id="editProfile" />
-</form>
+
 
 </div>
 

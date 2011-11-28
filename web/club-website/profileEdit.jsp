@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<td>Email Address :</td>
-			<td><input type="text" name="emailAddress" value="<%=user.getEmailAddress() %>" id="email" disabled/></td>
+			<td><input type="text" name="emailAddress" value="<%=user.getEmailAddress() %>" id="emailAddress" disabled/></td>
 		</tr>
 		<tr>
 			<td>Sex:</td>
@@ -41,16 +41,14 @@
 		</tr>
 		<tr>
 			<td>Password :</td>
-			<td><input type="password" name="password" id="password" /></td>
-		</tr>
-		<tr>
-			<td>Confirm Password :</td>
-			<td><input type="password" name="confirmPassword" id="confirmpassword" /></td>
+			<td><input type="submit" name="button" value="Change Password" id="changePassword" /></td>
 		</tr>
 	</table>
 	<input type="submit" name="button" style="width:13em" value="Submit Changes" id="submitProfile" />
 
 </form>
+
+<jsp:include page="errorMessage.jsp" />
 
 </div>
 

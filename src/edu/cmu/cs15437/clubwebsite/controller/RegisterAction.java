@@ -66,7 +66,7 @@ public class RegisterAction extends Action {
 
 			user = userDAO.create(user);
 			
-			// Remeber the user
+			// Remember the user
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			

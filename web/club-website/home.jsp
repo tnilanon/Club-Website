@@ -33,9 +33,9 @@ steps and technique.
     <li><i>What if I want more?</i> We go to competitions in Pittsburgh, the Midwest, and the Northeast.
                We can help you arrange private lessons with professional instructors.  And we have extra events
                during the year to learn dances like Salsa, Swing, and Hustle.
-    <li><i>Can I get more info?</i> Sure, check out the details on our <a href="lessons.php">Lessons</a>
+    <li><i>Can I get more info?</i> Sure, check out the details on our <a href="lessons.jsp">Lessons</a>
 
-               and our <a href="calendar.php">Calendar</a>, and
+               and our <a href="calendar.jsp">Calendar</a>, and
                <a href="mailto:ballroom@andrew.cmu.edu">email us</a> if you have more questions.
     </ul>
 </div>
@@ -72,38 +72,19 @@ Also, stay tuned for summer lessons information!<br /><br />
 Since there is only half a semester left, our membership is now 50% off! New round of lessons begins on Wednesday, 3/23.<br /><br />
 
 <b><font size=3>January 18, 2011</font></b>: College Ballroom Dance-Team Challenge<br /><br /> 
-CMUBDC has participated in College Ballroom Dance-Team Challenge organized by <a href="http://www.ballroomfantasy.com">ballroomfantasy.com</a> You can watch our video and vote for us by following <a href="http://www.ballroomfantasy.com/cbdcvote.php?video_id=CBDC_SCHOOL_VIDEOS/CMU_BDC.flv">this link</a>. You can vote for us once per day, per computer. <br /><br />
+CMUBDC has participated in College Ballroom Dance-Team Challenge organized by <a href="http://www.ballroomfantasy.com" target="_blank" >ballroomfantasy.com</a> You can watch our video and vote for us by following <a href="http://www.ballroomfantasy.com/cbdcvote.php?video_id=CBDC_SCHOOL_VIDEOS/CMU_BDC.flv">this link</a>. You can vote for us once per day, per computer. <br /><br />
 
 <b><font size=3>January 12, 2011</font></b>: Welcome back!<br /><br /> 
-Hope you had a great winter break. The new lessons description and schedules are now posted. Check our <a href="lessons.php">Lessons</a> and <a href="calendar.php">Calendar</a> pages for details. <br /><br />
+Hope you had a great winter break. The new lessons description and schedules are now posted. Check our <a href="lessons.jsp">Lessons</a> and <a href="calendar.jsp">Calendar</a> pages for details. <br /><br />
 
 <b><font size=3>December 10, 2010</font></b>: End of semester<br /><br />
 Thank you for a great semester. We will put up the lesson plan for Spring 2011 semester soon.<br /><br />
 
-<b><font size=3>September 30, 2010</font></b>: Review videos are updated.<br /><br />
-The review videos for Foxtrot, Cha-Cha, and Rumba are updated to reflect new steps taught yesterday. Check out our <a href="review-beg_social.php">Beginner Social</a> and <a href="review-adv_social.php">Advanced Social</a> review pages. Also, the videos are now in HD :) <br /><br />
-
-<b><font size=3>September 27, 2010</font></b>: Review videos are posted.<br /><br />
-Missed last week's lessons? Forget what were taught? Check out our <a href="review-beg_social.php">Beginner Social</a> and <a href="review-adv_social.php">Advanced Social</a> review pages.<br /><br />
-
-<b><font size=3>August 6, 2010</font></b>: Lessons description is now posted.<br /><br />
-Confused about which lessons to attend? Our <a href="lessons.php">Lessons</a> page has the answer! <br /><br />
-
-<b><font size=3>August 5, 2010</font></b>: Fall 2010 Lessons Schedule is up !!!<br /><br />
-Our lessons schedule for the Fall 2010 semester is up on our <a href="/calendar.php">calendar</a>. Hand schedule will be available at the lessons when semester starts.
-
-<br /><br />
-
-<a href="oldnews.php">Old news items</a>
-
 <br /><br />
 
 
-<b>Visits since Jan 12, 2011:</b>
+<b>Last Modified: since <%= new java.util.Date() %></b>
 <img alt="Website counter" hspace="0" vspace="0" border="0" src="http://www.supertrafficmonitor.com/3419061-FD4B4ED3C27EA9887A782A5345F1B7B5/counter.img?theme=39&digits=7&siteId=-1"/>
-
-
-<a class="invisible" href="http://www.truthinessrallypgh.com"></a>
 
 </div>
 

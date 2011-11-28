@@ -30,6 +30,14 @@
 	<li><a href="home.jsp">Home</a>
 	<li><a href="logout.do">Logout</a><br /><br />
     
+<%	if (user.getUserGroup()==5){ %>
+    <b><font color="white"><u>ADMIN</u></font></b>
+    <li>   <a href="admit.do">Admission</a>
+    <li>   <a href="#">Calendar</a>
+    <li>   <a href="#">Expiry</a>
+    <li><b><font color="white">---------------</font></b>
+    <% } %>
+    
     <b><font color="white"><u>RESOURCES</u></font></b>
     <li>   <a href="myProfile.do">Profile</a>
     <li>   <a href="#">Photos</a>

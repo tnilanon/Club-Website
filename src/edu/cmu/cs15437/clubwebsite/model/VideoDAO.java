@@ -100,7 +100,7 @@ public class VideoDAO {
 		videos = screenAccess(videos,userGroup);
 		
 		if( videos.size() > videoCount )
-			return videos.subList(0, videoCount-1);
+			return videos.subList(0, videoCount);
 		else
 			return videos;
 		

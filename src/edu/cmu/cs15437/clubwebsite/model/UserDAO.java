@@ -210,5 +210,17 @@ public class UserDAO {
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
+
+	public List<UserBean> getPendingMemberShip() throws DAOException {
+		List<UserBean> allusers = getAllUsers();
+		List<UserBean> list = new ArrayList<UserBean>(allusers.size());
+		Iterator<UserBean> iter = allusers.iterator();
+		while( iter.hasNext() ){
+			UserBean user = iter.next();
+			if( user.getUserGroup() < 1 || user.getUserGroup() > 5 )
+				list.add(user);
+		}
+		return list;
+	}
 }
 

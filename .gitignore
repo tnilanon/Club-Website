@@ -1,5 +1,9 @@
 build.properties
-build
-dist
+build/*
+dist/*
+.classpath
+.project
+.settings/*
+WebContent/*
 
 

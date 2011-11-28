@@ -6,6 +6,7 @@
 
 	}  --%>
 	
+<div class="Content">
 	
 <div class="_form" id="profileEditForm">
 	<p style="font-size:x-large">Edit Profile</p>
@@ -49,6 +50,8 @@
 </form>
 
 <jsp:include page="errorMessage.jsp" />
+
+</div>
 
 </div>
 

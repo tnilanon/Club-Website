@@ -1,7 +1,9 @@
 <jsp:include page="templateTop.jsp" />
 
+<div id="Content">
+
 <div class="_form" id="loginForm">
-	<p style="font-size:x-large">CMU Ballroom Dance Club</p>
+	<p style="font-size:x-large; margin: 2em 0 1em 0;">CMU Ballroom Dance Club</p>
 	<form method="POST" action="login.do">
 		<table class="centered">
 			<tr>
@@ -20,6 +22,8 @@
 	
 <jsp:include page="errorMessage.jsp" />
 	
+</div>
+
 </div>
 
 <jsp:include page="templateBottom.jsp" />
